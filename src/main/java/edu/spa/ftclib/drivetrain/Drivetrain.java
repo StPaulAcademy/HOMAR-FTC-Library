@@ -8,22 +8,38 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  */
 
 abstract public class Drivetrain {
-    private double velocity = 0;
-    public DcMotor[] motors;
-    private double[] motorPowers;
+    private double velocity = 0; //creates the velocity variable
+    public DcMotor[] motors; //creates the motor array
+    private double[] motorPowers; //creates the motorPowers array
+
+    /**
+     *
+     * @param motors
+     */
     public Drivetrain(DcMotor[] motors) {
         this.motors = motors;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getVelocity() {
         return velocity;
     }
 
+    /**
+     *
+     * @param velocity
+     */
     public void setVelocity(double velocity) {
         this.velocity = velocity;
         updateMotorPowers();
     }
 
+    /**
+     *
+     */
     protected void updateMotorPowers() {
         motorPowers = calculateMotorPowers();
         for (int i = 0; i < motorPowers.length; i++) {
@@ -31,5 +47,9 @@ abstract public class Drivetrain {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     abstract protected double[] calculateMotorPowers();
 }
