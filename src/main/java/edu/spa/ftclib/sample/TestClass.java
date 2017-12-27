@@ -7,6 +7,6 @@ package edu.spa.ftclib.sample;
 
 public class TestClass {
     public static String test() {
-        return "test";
+        return "Test";
     }
 }
