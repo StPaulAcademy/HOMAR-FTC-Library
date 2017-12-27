@@ -6,7 +6,7 @@ package edu.spa.ftclib.sample;
  */
 
 public class TestClass {
-    public final String test() {
+    public static String test() {
         return "test";
     }
 }
