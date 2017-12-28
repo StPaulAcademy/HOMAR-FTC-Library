@@ -6,6 +6,15 @@ package edu.spa.ftclib.activator;
  */
 
 public interface Activable {
+    /**
+     *
+     * @param activated whether or not the thing being activated should be activated or not
+     */
     void setActivated(boolean activated);
+
+    /**
+     *
+     * @return whether the thing being activated is currently activated
+     */
     boolean getActivated();
 }
