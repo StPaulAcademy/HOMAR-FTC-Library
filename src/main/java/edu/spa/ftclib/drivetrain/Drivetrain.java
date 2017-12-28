@@ -14,7 +14,7 @@ abstract public class Drivetrain {
 
     /**
      *
-     * @param motors
+     * @param motors the array of motors on the robot
      */
     public Drivetrain(DcMotor[] motors) {
         this.motors = motors;
@@ -22,7 +22,7 @@ abstract public class Drivetrain {
 
     /**
      *
-     * @return
+     * @return the velocity that the robot has been told to move with
      */
     public double getVelocity() {
         return velocity;
@@ -30,15 +30,15 @@ abstract public class Drivetrain {
 
     /**
      *
-     * @param velocity
+     * @param velocity the velocity that you want the robot to move with
      */
     public void setVelocity(double velocity) {
         this.velocity = velocity;
-        updateMotorPowers();
+        updateMotorPowers(); //sets the motor powers based on the velocity given
     }
 
     /**
-     *
+     * Calculates the motor powers and then sends the motor powers to the motors to move the robot
      */
     protected void updateMotorPowers() {
         motorPowers = calculateMotorPowers();
@@ -49,7 +49,7 @@ abstract public class Drivetrain {
 
     /**
      *
-     * @return
+     * @return the motorPowers array, which will then be sent to the motors to tell them how fast to move
      */
     abstract protected double[] calculateMotorPowers();
 }
