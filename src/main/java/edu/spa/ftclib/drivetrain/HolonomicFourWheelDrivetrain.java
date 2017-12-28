@@ -92,9 +92,20 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
      *
      * @param course the angle that you want the robot to move along
      * @param wheelAngle the array of angles that the actual moving parts of the wheels are at
-     * @return the power that the wheels should each move at, in an array
+     * @return a number between zero and one, which says what percentage of the speed a wheel should move at. Is then multiplied by the velocity
      */
     abstract double calculateWheelCoefficient(double course, double wheelAngle);
+
+    /**
+     *
+     * @param course the angle that you want the robot to more along
+     * @param velocity the velocity you want the robot to move with
+     * @param rotationPower the velocity that you want to rotate the robot by.
+     *                 Counterclockwise is positive and clockwise is negative.
+     *                 Zero is if you don't want to rotate the robot.
+     * @param wheelAngle the angle of the actual moving part of the wheel
+     * @return the power the motor is supposed to move with, which is then sent to the motor
+     */
     private double calculateWheelPower(double course, double velocity, double rotationPower, double wheelAngle) {
         return calculateWheelCoefficient(course, wheelAngle)*velocity+rotationPower;
     }

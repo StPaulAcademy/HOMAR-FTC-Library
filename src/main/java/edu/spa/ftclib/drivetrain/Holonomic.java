@@ -6,6 +6,15 @@ package edu.spa.ftclib.drivetrain;
  */
 
 public interface Holonomic {
+    /**
+     *
+     * @param course the direction you want the robot to move along in radians
+     */
     void setCourse(double course);
+
+    /**
+     *
+     * @return the direction the robot is supposed to be moving along in radians
+     */
     double getCourse();
 }

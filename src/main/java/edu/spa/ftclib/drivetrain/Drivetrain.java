@@ -40,7 +40,7 @@ abstract public class Drivetrain {
     /**
      * Calculates the motor powers and then sends the motor powers to the motors to move the robot
      */
-    void updateMotorPowers() {
+    protected void updateMotorPowers() {
         motorPowers = calculateMotorPowers();
         for (int i = 0; i < motorPowers.length; i++) {
             motors[i].setPower(motorPowers[i]);

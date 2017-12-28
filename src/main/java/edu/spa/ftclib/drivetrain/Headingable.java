@@ -8,7 +8,21 @@ package edu.spa.ftclib.drivetrain;
  */
 
 public interface Headingable extends Rotatable {
+    /**
+     *
+     * @param heading the angle that you want the robot to move towards
+     */
     void setHeading(double heading);
+
+    /**
+     *
+     * @return the angle the robot is currently facing
+     */
     double getCurrentHeading();
+
+    /**
+     *
+     * @return the heading that the robot is currently trying to get to or move along. What was passed in using @see setHeading
+     */
     double getTargetHeading();
 }
