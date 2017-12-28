@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  * Created by Gabriel on 2017-11-02; edited substantially on 2017-12-28.
  * Use this if you have a motor that you normally only turn on and off (e.g. part of an intake mechanism).
  * It will store the power you want to send to the motor when it is on, and then you can call setActivated(true) and setActivated(false) to automatically activate and deactivate the motor.
+ * The motor is public, so if you ever need to set it to run at a different power or change a setting you can do that.
  * Continuous rotation servos count as motors (DcMotorSimple is implemented by both DcMotor and CRServo).
  */
 

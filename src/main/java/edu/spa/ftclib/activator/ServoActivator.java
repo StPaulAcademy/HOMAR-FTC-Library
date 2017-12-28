@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by Gabriel on 2017-11-02; edited substantially on 2017-12-28.
  * Use this if you have a servo that you normally only set to two positions (e.g. an arm that holds something in place).
  * It will store the positions, and then you can call setActivated(true) and setActivated(false) to automatically activate and deactivate the servo.
+ * The servo is public, so if you ever need to move it to a different position or change a setting you can do that.
  */
 
 public class ServoActivator implements Activable {
