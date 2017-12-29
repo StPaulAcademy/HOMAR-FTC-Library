@@ -1,6 +1,7 @@
 package edu.spa.ftclib.drivetrain;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 
 /**
  * Created by Gabriel on 2017-12-27.
@@ -8,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * {@link MecanumDrivetrain} and {@link OmniwheelDrivetrain} extend this; we wrote this because most of that code is very similar.
  */
 
-abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements Holonomic, Rotatable {
+abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements Holonomic, Rotatable, Positionable {
     /**
      * Rotation velocity (the amount of power that should be added to each of the motors to make the drivetrain rotate)
      */
@@ -17,6 +18,21 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
      * The direction of travel
      */
     private double course = 0;
+    /**
+     * How far we're trying to go (when driving by position)
+     */
+    private double targetPosition = 0;
+
+    /**
+     * Stores how far each wheel has to go to get the drivetrain to a specific position
+     * @see #setTargetPosition
+     * @see #getCurrentPosition
+     */
+    private double[] wheelTargetPositions = new double[4];
+    /**
+     * The {@link RunMode RunModes} of each of the motors (used after changing the RunModes to move to a position)
+     */
+    private RunMode[] runModes = new RunMode[4];
     /**
      * A list of angles related to wheel and drivetrain geometry that must be defined by subclasses
      */
@@ -63,8 +79,8 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
     }
 
     /**
-     *
-     * @return the course the robot is supposed to be moving along
+     * Gets the direction the robot is supposed to be moving along.
+     * @return The course in radians, where 0 is forwards and {@link Math#PI}/2 is directly to the left.
      */
     @Override
     public double getCourse() {
@@ -72,8 +88,8 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
     }
 
     /**
-     * Gets the direction the robot is supposed to be moving along.
-     * @return The course in radians, where 0 is forwards and {@link Math#PI}/2 is directly to the left.
+     * Sets the velocity at which the robot should move.
+     * @param velocity The velocity that you want the robot to move with
      */
     @Override
     public void setVelocity(double velocity) {
@@ -114,5 +130,72 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
      */
     private double calculateWheelPower(double course, double velocity, double rotationPower, double wheelAngle) {
         return calculateWheelCoefficient(course, wheelAngle)*velocity+rotationPower;
+    }
+
+    /**
+     * @param targetPosition the position that you want the robot to move to
+     */
+    @Override
+    public void setTargetPosition(double targetPosition) {
+        for (int i = 0; i < runModes.length; i++) {
+            runModes[i] = motors[i].getMode();  //Save the RunModes so we can restore them later
+        }
+        this.targetPosition = targetPosition;
+        for (DcMotor motor : motors) motor.setMode(RunMode.STOP_AND_RESET_ENCODER);
+        for (DcMotor motor : motors) motor.setMode(RunMode.RUN_TO_POSITION);
+        for (int i = 0; i < motors.length; i++) {   //Calculate how far each wheel has to go to get the drivetrain to a specific position
+            wheelTargetPositions[i] = targetPosition*calculateWheelCoefficient(course, wheelAngles[i]);
+            motors[i].setTargetPosition((int)(wheelTargetPositions[i]+0.5));    //Round to the nearest int because setTargetPosition only accepts ints
+        }
+        updateMotorPowers();
+    }
+
+    /**
+     * @return the current position of the robot
+     */
+    @Override
+    public double getCurrentPosition() {    //We calculate the current position from the average of how far each motor has gone
+        double amountDone = 0;  //Sum of the fractions of the necessary distance each of the four motors has gone
+        for (int i = 0; i < 4; i++) {
+            amountDone += motors[i].getCurrentPosition()/wheelTargetPositions[i];
+        }
+        return amountDone/4*targetPosition; //The current position is the average fraction of the necessary distance across all four motors times the targetPosition
+    }
+
+    /**
+     * @return the position the robot is supposed to move to (the Target Position)
+     */
+    @Override
+    public double getTargetPosition() {
+        return targetPosition;
+    }
+
+    /**
+     * Recalculate motor powers to maintain or move towards the target position
+     */
+    @Override
+    public void updatePosition() {
+        //Empty — we use the built-in, automatic PID controller to move the motors, so there's nothing to update here.
+    }
+
+    /**
+     * Use this as a loop condition (with {@link #updatePosition in the loop body) if you want to move to a specific position and then move on to other code.
+     * @return Whether or not the drivetrain is still moving towards the target position
+     */
+    @Override
+    public boolean isPositioning() {    //TODO: improve this (sometimes isBusy takes a really long time to change to false)
+        for (DcMotor motor : motors) {
+            if (motor.isBusy()) return true;    //If any of the motors is still busy, we are still positioning
+        }
+        return false;
+    }
+
+    /**
+     * Resets encoders and changes the {@link RunMode RunModes} to what they were before
+     */
+    @Override
+    public void finishPositioning() {
+        for (DcMotor motor : motors) motor.setMode(RunMode.STOP_AND_RESET_ENCODER);
+        for (int i = 0; i < motors.length; i++) motors[i].setMode(runModes[i]);
     }
 }
