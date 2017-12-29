@@ -10,16 +10,42 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 public class ServoActivator implements Activable {
+    /**
+     * The current state of the servo. Is it supposed to be currently activated?
+     */
     private boolean activated = false;
-    public Servo servo;
-    private double activatedPosition, deactivatedPosition;
 
+    /**
+     * The servo that is being activated.
+     */
+    public Servo servo;
+
+    /**
+     * The activated position of the servo.
+     */
+    private double activatedPosition;
+
+    /**
+     * The deactivated position of the servo.
+     */
+    private double deactivatedPosition;
+
+    /**
+     * The constructor to create the servo activator.
+     * @param servo The servo being activated and deactivated
+     * @param activatedPosition The position of the servo when activated
+     * @param deactivatedPosition The position of the servo when deactivated
+     */
     public ServoActivator(Servo servo, double activatedPosition, double deactivatedPosition) {
         this.servo = servo;
         this.activatedPosition = activatedPosition;
         this.deactivatedPosition = deactivatedPosition;
     }
 
+    /**
+     * Activate or deactivate the servo.
+     * @param activated Whether or not the thing being activated should be activated or not
+     */
     @Override
     public void setActivated(boolean activated) {
         this.activated = activated;
@@ -27,26 +53,46 @@ public class ServoActivator implements Activable {
         else servo.setPosition(deactivatedPosition);
     }
 
+    /**
+     * Says if the servo is currently activated or not.
+     * @return If the servo is currently activated
+     */
     @Override
     public boolean getActivated() {
         return activated;
     }
 
+    /**
+     * Gets the activated servo position.
+     * @return The servo position when activated
+     */
     public double getActivatedPosition() {
         return activatedPosition;
     }
 
+    /**
+     * Sets a new activated servo position.
+     * @param activatedPosition The new position of the servo when activated
+     */
     public void setActivatedPosition(double activatedPosition) {
         this.activatedPosition = activatedPosition;
-        if (activated)  servo.setPosition(activatedPosition);   //Update motor power if necessary
+        if (activated)  servo.setPosition(activatedPosition);   //Update servo position if necessary
     }
 
+    /**
+     * Gets the deactivated servo position.
+     * @return The servo position when deactivated
+     */
     public double getDeactivatedPosition() {
         return deactivatedPosition;
     }
 
+    /**
+     * Sets a new deactivated servo position.
+     * @param deactivatedPosition The new position of the servo when deactivated
+     */
     public void setDeactivatedPosition(double deactivatedPosition) {
         this.deactivatedPosition = deactivatedPosition;
-        if (!activated) servo.setPosition(deactivatedPosition); //Update motor power if necessary
+        if (!activated) servo.setPosition(deactivatedPosition); //Update servo position if necessary
     }
 }

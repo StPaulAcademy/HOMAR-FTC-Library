@@ -6,6 +6,10 @@ package edu.spa.ftclib.sample;
  */
 
 public class TestClass {
+    /**
+     *
+     * @return the word "test" to tell you that the library has installed correctly
+     */
     public static String test() {
         return "Test";
     }

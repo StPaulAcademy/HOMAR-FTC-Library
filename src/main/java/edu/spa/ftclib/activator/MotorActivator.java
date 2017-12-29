@@ -11,19 +11,45 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  */
 
 public class MotorActivator implements Activable {
+    /**
+     * The current state of the motor. Is it supposed to be currently activated?
+     */
     private boolean activated = false;
-    public DcMotorSimple motor;  //This includes normal DC motors and continuous rotation servos.
+
+    /**
+     * The motor that is being activated. It includes normal DC motors and continuous rotation servos.
+     */
+    public DcMotorSimple motor;
+
+    /**
+     * The power the motor will run with when activated
+     */
     private double activatedPower;
 
+    /**
+     * The constuctor for if you don't provide an activated power.
+     * Sets the activated power to 1.
+     * @param motor The motor that is being activated
+     */
     public MotorActivator(DcMotorSimple motor) {
         this(motor, 1);
     }
+
+    /**
+     * The constructor for it an activated power is provided
+     * @param motor The motor being activated
+     * @param activatedPower The power the motor should run with when activated
+     */
 
     public MotorActivator(DcMotorSimple motor, double activatedPower) {
         this.motor = motor;
         this.activatedPower = activatedPower;
     }
 
+    /**
+     * Sends the activated motor power to the motor if the motor is activated and turns the motor off if it is deactivated.
+     * @param activated Whether or not the thing being activated should be activated or not
+     */
     @Override
     public void setActivated(boolean activated) {
         this.activated = activated;
@@ -31,15 +57,27 @@ public class MotorActivator implements Activable {
         else motor.setPower(0);
     }
 
+    /**
+     * Says if the motor is currently activated or not.
+     * @return If the motor is currently activated
+     */
     @Override
     public boolean getActivated() {
         return activated;
     }
 
+    /**
+     * Returns the activated power of the motor.
+     * @return The power the motor moves with when activated
+     */
     public double getActivatedPower() {
         return activatedPower;
     }
 
+    /**
+     * Updates the activatedPower to a new value.
+     * @param activatedPower The new activated power that is wanted
+     */
     public void setActivatedPower(double activatedPower) {
         this.activatedPower = activatedPower;
         if (activated) motor.setPower(activatedPower);  //Update motor power if necessary

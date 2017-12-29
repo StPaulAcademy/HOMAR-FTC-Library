@@ -8,21 +8,49 @@ package edu.spa.ftclib.toggle;
 public class ToggleDouble {
     private int toggleIndex = 0;    //Current state of the toggle
     private boolean previouslyActuated = false; //Was the actuator (whatever is passed to input) true last time?
-    private final double[] toggleValues;
+    private final double[] toggleValues; //creates the array of values to toggle through
+
+    /**
+     *
+     * @param toggleValues the array of values to toggle through
+     */
     public ToggleDouble(double[] toggleValues) {    //Pass this an array of the values you want the toggle to cycle between. It will start at element 0, work its way through sequentially, then go back to element 0.
         this.toggleValues = toggleValues;
     }
-    public void input(boolean currentlyActuated) {  //Call this method in your main op-mode loop; pass it the state of whatever actuator (eg. button) you want to use to control the toggle
+
+    /**
+     *
+     * Call this method in your main op-mode loop
+     *
+     * @param currentlyActuated the current state of the button that controls the toggle
+     */
+    public void input(boolean currentlyActuated) {
+        //if the button is being pressed now and wasn't being pressed last time, change the value of the toggle
         if (currentlyActuated && !previouslyActuated) toggle();
+        //change previoulyActuated to reflect the current state of the toggle
         previouslyActuated = currentlyActuated;
     }
-    public void toggle() {  //Toggle the toggle (generally you shouldn't need this)
+
+    /**
+     * Where the actual toggling happens. Generally you shouldn't need this
+     */
+    public void toggle() {
         toggleIndex++;
         toggleIndex %= toggleValues.length;
     }
+
+    /**
+     *
+     * @param toggleIndex the index of the array that the toggle is currently set to
+     */
     public void setToggleIndex(int toggleIndex) {   //Set the toggle to a specific value, specified by the index of that value in the toggleValues array (generally you shouldn't need this)
         this.toggleIndex = toggleIndex;
     }
+
+    /**
+     *
+     * @return the index of the array that the toggle is currently set to
+     */
     public double output() {    //Get the value of the toggle; call this whenever you need to use the toggle to control something
         return toggleValues[toggleIndex];
     }
