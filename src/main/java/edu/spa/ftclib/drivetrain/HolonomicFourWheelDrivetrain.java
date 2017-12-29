@@ -179,10 +179,11 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
 
     /**
      * Use this as a loop condition (with {@link #updatePosition in the loop body) if you want to move to a specific position and then move on to other code.
+     * If the drivetrain never seems to stop positioning, use {@link com.qualcomm.robotcore.hardware.DcMotorEx#setTargetPositionTolerance} on each of your motors to make them less perfectionistic.
      * @return Whether or not the drivetrain is still moving towards the target position
      */
     @Override
-    public boolean isPositioning() {    //TODO: improve this (sometimes isBusy takes a really long time to change to false)
+    public boolean isPositioning() {
         for (DcMotor motor : motors) {
             if (motor.isBusy()) return true;    //If any of the motors is still busy, we are still positioning
         }
