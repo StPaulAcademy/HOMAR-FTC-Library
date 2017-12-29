@@ -10,7 +10,7 @@ public interface Positionable {
      *
      * @param position the position that you want the robot to move to
      */
-    void setPosition(double position);
+    void setTargetPosition(double position);
 
     /**
      *
@@ -23,4 +23,15 @@ public interface Positionable {
      * @return the position the robot is supposed to move to (the Target Position)
      */
     double getTargetPosition();
+
+    /**
+     * Recalculate motor powers to maintain or move towards the target position
+     */
+    void updatePosition();
+
+    /**
+     * Use this as a loop condition (with {@link #updatePosition in the loop body) if you want to move to a specific position and then move on to other code.
+     * @return Whether or not the drivetrain is still moving towards the target position
+     */
+    boolean isPositioning();
 }

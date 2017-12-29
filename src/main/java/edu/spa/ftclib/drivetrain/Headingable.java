@@ -10,9 +10,9 @@ package edu.spa.ftclib.drivetrain;
 public interface Headingable extends Rotatable {
     /**
      * Set the target heading of the drivetrain.
-     * @param heading the angle that you want the drivetrain to move towards
+     * @param targetHeading the angle that you want the drivetrain to move towards
      */
-    void setHeading(double heading);
+    void setTargetHeading(double targetHeading);
 
     /**
      * Get the current heading of the drivetrain (presumably a value from a sensor and not necessarily the drivetrain's target heading).
@@ -21,8 +21,19 @@ public interface Headingable extends Rotatable {
     double getCurrentHeading();
 
     /**
-     * Get the target heading of the drivetrain (not necessarily the actual, current heading of the drivetrain), passed in using {@link #setHeading}.
+     * Get the target heading of the drivetrain (not necessarily the actual, current heading of the drivetrain), passed in using {@link #setTargetHeading}.
      * @return the heading that the robot is currently trying to get to or move along.
      */
     double getTargetHeading();
+
+    /**
+     * Recalculate motor powers to maintain or move towards the target heading
+     */
+    void updateHeading();
+
+    /**
+     * Use this as a loop condition (with {@link #updateHeading in the loop body) if you want to turn to a specific heading and then move on to other code.
+     * @return Whether or not the drivetrain is still rotating towards the target heading
+     */
+    boolean isRotating();
 }
