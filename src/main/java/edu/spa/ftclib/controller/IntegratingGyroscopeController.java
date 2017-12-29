@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
  * Created by Gabriel on 2017-12-28.
  */
 
-public class IntegratingGyroscopeController extends SensorController {
+public class IntegratingGyroscopeController extends HeadingController {
     IntegratingGyroscope gyro;
     public IntegratingGyroscopeController(IntegratingGyroscope gyro, ControlAlgorithm algorithm) {
         super(algorithm);

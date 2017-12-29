@@ -2,39 +2,22 @@ package edu.spa.ftclib.drivetrain;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import edu.spa.ftclib.controller.SensorController;
+import edu.spa.ftclib.controller.HeadingController;
 
 /**
  * Created by Gabriel on 2017-12-29.
  */
 
 public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements Headingable {
-    private static final double DEFAULT_HEADING_TOLERANCE = Math.PI/50;
-    /**
-     * How long (in nanoseconds) the measured heading must be within {@link #DEFAULT_HEADING_TOLERANCE} of the target heading before {@link #isRotating} is false
-     */
-    private static final long DEFAULT_HEADING_DURATION = (long)1E9;
-    private SensorController controller;    //TODO: maybe make this an UpdateableController?
-    private double targetHeading = 0;
-    private double headingTolerance;
-    private double headingDuration;
+    private HeadingController controller;
     private long lastOutOfRange;
-
+    private double targetHeading = 0;
     /**
      * @param motors the array of motors that you give the constructor so that it can find the hardware
      */
-    public HeadingableMecanumDrivetrain(DcMotor[] motors, SensorController controller) {
-        this(motors, controller, DEFAULT_HEADING_TOLERANCE, DEFAULT_HEADING_DURATION);
-    }
-
-    /**
-     * @param motors the array of motors that you give the constructor so that it can find the hardware
-     */
-    public HeadingableMecanumDrivetrain(DcMotor[] motors, SensorController controller, double headingTolerance, double headingDuration) {
+    public HeadingableMecanumDrivetrain(DcMotor[] motors, HeadingController controller, double headingTolerance, double headingDuration) {
         super(motors);
         this.controller = controller;
-        this.headingTolerance = headingTolerance;
-        this.headingDuration = headingDuration;
     }
 
     /**
@@ -72,7 +55,6 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
      */
     @Override
     public void updateHeading() {
-        if (Math.abs(targetHeading-getCurrentHeading()) > headingTolerance) lastOutOfRange = System.nanoTime();
         controller.update();
         setRotation(controller.output());
     }
@@ -84,7 +66,7 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
      */
     @Override
     public boolean isRotating() {
-        return (System.nanoTime()-lastOutOfRange) > headingDuration;    //If the last time the measured heading was more than headingTolerance away from the target heading was more than headingDuration nanoseconds ago, the rotation is done
+        return !controller.finished();
     }
 
     /**

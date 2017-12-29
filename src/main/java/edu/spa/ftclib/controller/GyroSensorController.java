@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
  * Created by Gabriel on 2017-12-28.
  */
 
-public class GyroSensorController extends SensorController {
+public class GyroSensorController extends HeadingController {
     GyroSensor gyro;
     public GyroSensorController(GyroSensor gyro, ControlAlgorithm algorithm) {
         super(algorithm);
