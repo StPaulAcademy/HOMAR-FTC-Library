@@ -171,11 +171,10 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
     }
 
     /**
-     * Recalculate motor powers to maintain or move towards the target position
+     * Empty — we use the built-in, automatic PID controller to move the motors, so there's nothing to update here.
      */
     @Override
     public void updatePosition() {
-        //Empty — we use the built-in, automatic PID controller to move the motors, so there's nothing to update here.
     }
 
     /**

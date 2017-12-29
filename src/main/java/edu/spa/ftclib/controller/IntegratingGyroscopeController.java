@@ -18,7 +18,7 @@ public class IntegratingGyroscopeController extends SensorController {
     }
 
     @Override
-    protected double getSensorValue() {
+    public double getSensorValue() {
         return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZXY, AngleUnit.RADIANS).firstAngle;
     }
 }

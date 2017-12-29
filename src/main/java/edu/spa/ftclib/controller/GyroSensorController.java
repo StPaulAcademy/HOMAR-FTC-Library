@@ -15,7 +15,7 @@ public class GyroSensorController extends SensorController {
     }
 
     @Override
-    protected double getSensorValue() {
+    public double getSensorValue() {
         return gyro.getHeading()*-Math.PI/180;
     }
 }

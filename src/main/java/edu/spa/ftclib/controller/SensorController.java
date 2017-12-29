@@ -24,7 +24,7 @@ public abstract class SensorController implements UpdateableController {
      * Gets the value from the sensor to be used as an input.
      * @return The input value from the sensor
      */
-    protected abstract double getSensorValue();
+    public abstract double getSensorValue();
 
     /**
      * Gives the sensor value to the algorithm so that the algorithm can calculate a usable value for the system.
