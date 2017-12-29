@@ -34,4 +34,9 @@ public interface Positionable {
      * @return Whether or not the drivetrain is still moving towards the target position
      */
     boolean isPositioning();
+
+    /**
+     * If there are any settings (motor {@link com.qualcomm.robotcore.hardware.DcMotor.RunMode RunModes}, etc.) you changed to position, change them back in this method.
+     */
+    void finishPositioning();
 }

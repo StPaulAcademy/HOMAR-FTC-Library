@@ -36,4 +36,9 @@ public interface Headingable extends Rotatable {
      * @return Whether or not the drivetrain is still rotating towards the target heading
      */
     boolean isRotating();
+
+    /**
+     * If there are any settings (motor {@link com.qualcomm.robotcore.hardware.DcMotor.RunMode RunModes}, etc.) you changed to rotate, change them back in this method.
+     */
+    void finishRotating();
 }
