@@ -1,7 +1,7 @@
 package edu.spa.ftclib.toggle;
 
 /**
- * Created by Gabriel on 10/31/2017.
+ * Created by Gabriel on 2017-10-31.
  * Use to implement a toggle that toggles between values in the toggleValues array when a button is pressed
  */
 

@@ -1,7 +1,7 @@
 package edu.spa.ftclib.toggle;
 
 /**
- * Created by Gabriel on 10/31/2017.
+ * Created by Gabriel on 2017-10-31.
  * Use to implement a 0, 1, 2, ..., (maxToggle-1), 0, 1, 2, ... toggle that toggles (increments or revert to 0) when a button is pressed
  */
 
