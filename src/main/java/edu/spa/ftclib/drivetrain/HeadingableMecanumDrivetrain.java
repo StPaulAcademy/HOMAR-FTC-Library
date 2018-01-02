@@ -6,16 +6,36 @@ import edu.spa.ftclib.old_controller.HeadingController;
 
 /**
  * Created by Gabriel on 2017-12-29.
+ * A Mecanum Drivetrain with some sort of heading sensor, such as a gyro. Uses the sensor and a controller specified by the user to control the system.
  */
 
 public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements Headingable {
-    private HeadingController controller;
-    private long lastOutOfRange;
-    private double targetHeading = 0;
     /**
-     * @param motors the array of motors that you give the constructor so that it can find the hardware
+     * The controller being used.
+     * @see edu.spa.ftclib.controller.PIDController
+     * @see edu.spa.ftclib.controller.PIController
+     * @see edu.spa.ftclib.controller.PController
      */
-    public HeadingableMecanumDrivetrain(DcMotor[] motors, HeadingController controller, double headingTolerance, double headingDuration) {
+    private HeadingController controller;
+
+    /**
+     * The last time the heading was not within the heading tolerance.
+     * @see HeadingController #DEFAULT_HEADING_TOLERANCE
+     */
+    private long lastOutOfRange;
+
+    /**
+     * The target heading
+     */
+    private double targetHeading = 0;
+
+    /**
+     * The constructor for the drivetrain.
+     * @param motors The array of motors that you give the constructor so that it can find the hardware
+     * @param controller Which controller you want the system to use.
+     *                   @see edu.spa.ftclib.controller.PIDController
+     */
+    public HeadingableMecanumDrivetrain(DcMotor[] motors, HeadingController controller) {
         super(motors);
         this.controller = controller;
     }
@@ -23,7 +43,7 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
     /**
      * Set the target heading of the drivetrain.
      *
-     * @param targetHeading the angle that you want the drivetrain to move towards
+     * @param targetHeading The angle that you want the drivetrain to move towards
      */
     @Override
     public void setTargetHeading(double targetHeading) {
@@ -33,7 +53,7 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
     /**
      * Get the current heading of the drivetrain (presumably a value from a sensor and not necessarily the drivetrain's target heading).
      *
-     * @return the angle the drivetrain is currently facing
+     * @return The angle the drivetrain is currently facing
      */
     @Override
     public double getCurrentHeading() {
@@ -43,7 +63,7 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
     /**
      * Get the target heading of the drivetrain (not necessarily the actual, current heading of the drivetrain), passed in using {@link #setTargetHeading}.
      *
-     * @return the heading that the robot is currently trying to get to or move along.
+     * @return The heading that the robot is currently trying to get to or maintain
      */
     @Override
     public double getTargetHeading() {
@@ -70,7 +90,7 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
     }
 
     /**
-     * Empty — we don't change any setting that need to be changed back
+     * Empty — we don't change any setting that needs to be changed back
      */
     @Override
     public void finishRotating() {
