@@ -2,7 +2,7 @@ package edu.spa.ftclib.drivetrain;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import edu.spa.ftclib.old_controller.HeadingController;
+import edu.spa.ftclib.controller.FinishableIntegratedController;
 
 /**
  * Created by Michaela on 2018-1-2.
@@ -16,11 +16,11 @@ public class HeadingableTankDrivetrain extends TankDrivetrain implements Heading
      * @see edu.spa.ftclib.old_controller.PIController
      * @see edu.spa.ftclib.old_controller.Controller
      */
-    private HeadingController controller;
+    private FinishableIntegratedController controller;
 
     /**
      * The last time the heading was not within the heading tolerance.
-     * @see HeadingController #DEFAULT_HEADING_TOLERANCE
+     * @see FinishableIntegratedController
      */
     private long lastOutOfRange;
 
@@ -34,7 +34,7 @@ public class HeadingableTankDrivetrain extends TankDrivetrain implements Heading
      * @param controller Which controller you want the system to use.
      *                   @see edu.spa.ftclib.old_controller.PIDController
      */
-    public HeadingableTankDrivetrain(DcMotor[] motors, HeadingController controller) {
+    public HeadingableTankDrivetrain(DcMotor[] motors, FinishableIntegratedController controller) {
         super(motors);
         this.controller = controller;
     }

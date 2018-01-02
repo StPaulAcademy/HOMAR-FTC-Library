@@ -2,7 +2,7 @@ package edu.spa.ftclib.drivetrain;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import edu.spa.ftclib.old_controller.HeadingController;
+import edu.spa.ftclib.controller.FinishableIntegratedController;
 
 /**
  * Created by Gabriel on 2017-12-29.
@@ -16,11 +16,11 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
      * @see edu.spa.ftclib.controller.PIController
      * @see edu.spa.ftclib.controller.PController
      */
-    private HeadingController controller;
+    private FinishableIntegratedController controller;
 
     /**
      * The last time the heading was not within the heading tolerance.
-     * @see HeadingController #DEFAULT_HEADING_TOLERANCE
+     * @see FinishableIntegratedController
      */
     private long lastOutOfRange;
 
@@ -34,7 +34,7 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
      * @param controller Which controller you want the system to use.
      *                   @see edu.spa.ftclib.controller.PIDController
      */
-    public HeadingableOmniwheelDrivetrain(DcMotor[] motors, HeadingController controller) {
+    public HeadingableOmniwheelDrivetrain(DcMotor[] motors, FinishableIntegratedController controller) {
         super(motors);
         this.controller = controller;
     }

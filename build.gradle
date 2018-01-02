@@ -32,4 +32,5 @@ repositories {
 
 dependencies {
     compile (name: 'RobotCore-release', ext: 'aar')
+    compile (name: 'Hardware-release', ext: 'aar')
 }

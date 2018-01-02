@@ -88,16 +88,6 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
     }
 
     /**
-     * Sets the velocity at which the robot should move.
-     * @param velocity The velocity that you want the robot to move with
-     */
-    @Override
-    public void setVelocity(double velocity) {
-        super.setVelocity(velocity);
-        updateMotorPowers(); //sends power to the motors based on the velocity given
-    }
-
-    /**
      * Re-calculate the powers for each of the motors (called after a velocity, rotation, or course change).
      * @return an array of motorPowers, which is then sent to the motors to move the robot
      */
