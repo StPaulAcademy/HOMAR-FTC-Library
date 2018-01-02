@@ -33,6 +33,7 @@ public class TankDrivetrain extends Drivetrain implements Rotatable, Positionabl
     @Override
     public void setRotation(double rotation) {
         this.rotation = rotation;
+        updateMotorPowers();
     }
 
     /**
@@ -42,17 +43,6 @@ public class TankDrivetrain extends Drivetrain implements Rotatable, Positionabl
     @Override
     public double getRotation() {
         return rotation;
-    }
-
-
-    /**
-     *
-     * @param velocity the velocity at which the robot is supposed to move forward or backwards
-     */
-    @Override
-    public void setVelocity(double velocity) {
-        super.setVelocity(velocity);
-
     }
 
     /**
@@ -124,6 +114,7 @@ public class TankDrivetrain extends Drivetrain implements Rotatable, Positionabl
      */
     @Override
     public void finishPositioning() {
-
+        for (DcMotor motor : motors) motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        for (int i = 0; i < motors.length; i++) motors[i].setMode(runModes[i]);
     }
 }
