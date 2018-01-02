@@ -1,7 +1,6 @@
-package edu.spa.ftclib.controller;
+package edu.spa.ftclib.old_controller;
 
 import com.qualcomm.robotcore.hardware.GyroSensor;
-import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 
 /**
  * Created by Gabriel on 2017-12-28.

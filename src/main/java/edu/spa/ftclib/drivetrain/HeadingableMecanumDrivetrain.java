@@ -2,7 +2,7 @@ package edu.spa.ftclib.drivetrain;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import edu.spa.ftclib.controller.HeadingController;
+import edu.spa.ftclib.old_controller.HeadingController;
 
 /**
  * Created by Gabriel on 2017-12-29.

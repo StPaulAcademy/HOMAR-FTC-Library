@@ -1,4 +1,4 @@
-package edu.spa.ftclib.controller;
+package edu.spa.ftclib.old_controller;
 
 import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 
