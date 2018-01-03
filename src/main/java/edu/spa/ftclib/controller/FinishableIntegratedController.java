@@ -8,7 +8,7 @@ import edu.spa.ftclib.sensor.Sensor;
 
 public class FinishableIntegratedController extends IntegratedController {
     FinishingAlgorithm finisher;
-    FinishableIntegratedController(Sensor sensor, ControlAlgorithm algorithm, FinishingAlgorithm finisher) {
+    public FinishableIntegratedController(Sensor sensor, ControlAlgorithm algorithm, FinishingAlgorithm finisher) {
         super(sensor, algorithm);
         this.finisher = finisher;
     }

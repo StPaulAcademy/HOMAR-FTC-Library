@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 public class GyroSensorSensor implements Sensor {
     GyroSensor gyro;
     HeadingConverter converter = new HeadingConverter();
-    GyroSensorSensor(GyroSensor gyro) {
+    public GyroSensorSensor(GyroSensor gyro) {
         this.gyro = gyro;
     }
     @Override

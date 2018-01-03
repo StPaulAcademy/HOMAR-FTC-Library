@@ -11,7 +11,7 @@ public class IntegratedController implements Controller, Targetable {
     ControlAlgorithm algorithm;
     private double target;
 
-    IntegratedController(Sensor sensor, ControlAlgorithm algorithm) {
+    public IntegratedController(Sensor sensor, ControlAlgorithm algorithm) {
         this.sensor = sensor;
         this.algorithm = algorithm;
     }

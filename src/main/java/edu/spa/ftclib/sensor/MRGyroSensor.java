@@ -8,7 +8,7 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 
 public class MRGyroSensor implements Sensor {
     private ModernRoboticsI2cGyro gyro;
-    MRGyroSensor(ModernRoboticsI2cGyro gyro) {
+    public MRGyroSensor(ModernRoboticsI2cGyro gyro) {
         this.gyro = gyro;
     }
     @Override
