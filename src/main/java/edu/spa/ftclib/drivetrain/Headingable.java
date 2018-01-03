@@ -31,6 +31,8 @@ public interface Headingable extends Rotatable {
      */
     void updateHeading();
 
+    void rotate();
+
     /**
      * Use this as a loop condition (with {@link #updateHeading in the loop body) if you want to turn to a specific heading and then move on to other code.
      * @return Whether or not the drivetrain is still rotating towards the target heading

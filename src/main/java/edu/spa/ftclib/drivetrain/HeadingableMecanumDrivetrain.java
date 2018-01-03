@@ -79,6 +79,12 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
         setRotation(controller.output());
     }
 
+    @Override
+    public void rotate() {
+        while (isRotating()) updateHeading();
+        finishRotating();
+    }
+
     /**
      * Use this as a loop condition (with {@link #updateHeading in the loop body) if you want to turn to a specific heading and then move on to other code.
      *
