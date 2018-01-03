@@ -15,8 +15,12 @@ import java.io.Writer;
 public class Log {
     private static final String BASE_FOLDER_NAME = "FIRST";
     private Writer fileWriter;
-    String line = "";
-    Log(String filename) {
+    String line;
+    boolean logTime;
+    long startTime;
+    Log(String filename, boolean logTime) {
+        if (logTime) startTime = System.nanoTime();
+        this.logTime = logTime;
         String directoryPath = Environment.getExternalStorageDirectory().getPath()+"/"+BASE_FOLDER_NAME;
         File directory = new File(directoryPath);
         //noinspection ResultOfMethodCallIgnored
@@ -36,6 +40,10 @@ public class Log {
     }
     public void update() {
         try {
+            if (logTime) {
+                long timeDifference = System.nanoTime()-startTime;
+                line = timeDifference/1E9+","+line;
+            }
             fileWriter.write(line+"\n");
             line = "";
         } catch (IOException e) {
