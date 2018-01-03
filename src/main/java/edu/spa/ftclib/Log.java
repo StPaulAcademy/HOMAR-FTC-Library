@@ -15,9 +15,10 @@ import java.io.Writer;
 public class Log {
     private static final String BASE_FOLDER_NAME = "FIRST";
     private Writer fileWriter;
-    String line;
-    boolean logTime;
-    long startTime;
+    private String line;
+    private boolean logTime;
+    private long startTime;
+    private boolean disabled = false;
     Log(String filename, boolean logTime) {
         if (logTime) startTime = System.nanoTime();
         this.logTime = logTime;
@@ -31,6 +32,15 @@ public class Log {
             e.printStackTrace();
         }
     }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
     public void close() {
         try {
             fileWriter.close();
@@ -38,7 +48,9 @@ public class Log {
             e.printStackTrace();
         }
     }
+
     public void update() {
+        if (disabled) return;
         try {
             if (logTime) {
                 long timeDifference = System.nanoTime()-startTime;
@@ -50,7 +62,9 @@ public class Log {
             e.printStackTrace();
         }
     }
+
     public void addData(String data) {
+        if (disabled) return;
         if (!line.equals("")) line += ",";
         line += data;
     }
@@ -81,5 +95,4 @@ public class Log {
     public void addData(double data) {
         addData(String.valueOf(data));
     }
-
 }

@@ -17,4 +17,7 @@ public interface Activable {
      * @return whether the thing being activated is currently activated
      */
     boolean getActivated();
+
+    void activate();
+    void deactivate();
 }

@@ -62,6 +62,16 @@ public class ServoActivator implements Activable {
         return activated;
     }
 
+    @Override
+    public void activate() {
+        setActivated(true);
+    }
+
+    @Override
+    public void deactivate() {
+        setActivated(false);
+    }
+
     /**
      * Gets the activated servo position.
      * @return The servo position when activated

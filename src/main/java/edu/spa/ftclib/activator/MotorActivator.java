@@ -66,6 +66,16 @@ public class MotorActivator implements Activable {
         return activated;
     }
 
+    @Override
+    public void activate() {
+        setActivated(true);
+    }
+
+    @Override
+    public void deactivate() {
+        setActivated(false);
+    }
+
     /**
      * Returns the activated power of the motor.
      * @return The power the motor moves with when activated
