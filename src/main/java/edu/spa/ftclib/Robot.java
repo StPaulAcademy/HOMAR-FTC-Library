@@ -15,12 +15,10 @@ import edu.spa.ftclib.drivetrain.Drivetrain;
  */
 
 public class Robot {
-    public Drivetrain drivetrain;   //TODO: maybe don't include this?
     public Telemetry telemetry;
     public HardwareMap hardwareMap;
 
-    Robot(Drivetrain drivetrain, Telemetry telemetry, HardwareMap hardwareMap) {
-        this.drivetrain = drivetrain;
+    Robot(Telemetry telemetry, HardwareMap hardwareMap) {
         this.telemetry = telemetry;
         this.hardwareMap = hardwareMap;
     }
