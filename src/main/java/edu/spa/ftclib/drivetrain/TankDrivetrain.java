@@ -24,6 +24,10 @@ public class TankDrivetrain extends Drivetrain implements Rotatable, Positionabl
         super(motors);
     }
 
+    public TankDrivetrain(DcMotor motor1, DcMotor motor2) {
+        this(new DcMotor[] {motor1, motor2});
+    }
+
     /**
      *
      * @param rotation the velocity that you want to rotate the robot by.

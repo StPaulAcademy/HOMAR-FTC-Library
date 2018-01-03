@@ -39,6 +39,11 @@ public class HeadingableTankDrivetrain extends TankDrivetrain implements Heading
         this.controller = controller;
     }
 
+    public HeadingableTankDrivetrain(DcMotor motor1, DcMotor motor2, FinishableIntegratedController controller) {
+        super(motor1, motor2);
+        this.controller = controller;
+    }
+
     /**
      * Set the target heading of the drivetrain.
      *
