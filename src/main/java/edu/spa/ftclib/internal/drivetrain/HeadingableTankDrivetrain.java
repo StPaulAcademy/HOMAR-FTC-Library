@@ -12,9 +12,9 @@ import edu.spa.ftclib.internal.controller.FinishableIntegratedController;
 public class HeadingableTankDrivetrain extends TankDrivetrain implements Headingable {
     /**
      * The controller being used.
-     * @see edu.spa.ftclib.old_controller.PIDController
-     * @see edu.spa.ftclib.old_controller.PIController
-     * @see edu.spa.ftclib.old_controller.Controller
+     * @see edu.spa.ftclib.internal.controller.PIDController
+     * @see edu.spa.ftclib.internal.controller.PIController
+     * @see edu.spa.ftclib.internal.controller.Controller
      */
     private FinishableIntegratedController controller;
 
@@ -32,7 +32,7 @@ public class HeadingableTankDrivetrain extends TankDrivetrain implements Heading
      * The constructor for the drivetrain.
      * @param motors The array of motors that you give the constructor so that it can find the hardware
      * @param controller Which controller you want the system to use.
-     *                   @see edu.spa.ftclib.old_controller.PIDController
+     *                   @see edu.spa.ftclib.internal.controller.PIDController
      */
     public HeadingableTankDrivetrain(DcMotor[] motors, FinishableIntegratedController controller) {
         super(motors);
@@ -81,6 +81,13 @@ public class HeadingableTankDrivetrain extends TankDrivetrain implements Heading
     public void updateHeading() {
         controller.update();
         setRotation(controller.output());
+    }
+
+
+    @Override
+    public void rotate() {
+        while (isRotating()) updateHeading();
+        finishRotating();
     }
 
     /**
