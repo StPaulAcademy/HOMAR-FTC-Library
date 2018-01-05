@@ -16,7 +16,7 @@ public class Robot {
     public Telemetry telemetry;
     public HardwareMap hardwareMap;
 
-    Robot(Telemetry telemetry, HardwareMap hardwareMap) {
+    public Robot(Telemetry telemetry, HardwareMap hardwareMap) {
         this.telemetry = telemetry;
         this.hardwareMap = hardwareMap;
     }
