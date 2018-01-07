@@ -1,4 +1,4 @@
-package edu.spa.ftclib.internal.toggle;
+package edu.spa.ftclib.internal.state;
 
 /**
  * Created by Gabriel on 2017-10-31.
@@ -7,7 +7,7 @@ package edu.spa.ftclib.internal.toggle;
 
 public class ToggleDouble {
     private int toggleIndex = 0;    //Current state of the toggle
-    private boolean previouslyActuated = false; //Was the actuator (whatever is passed to input) true last time?
+    private boolean previouslyPressed = false; //Was the input device (whatever is passed to input) true last time?
     private final double[] toggleValues; //creates the array of values to toggle through
 
     /**
@@ -22,13 +22,13 @@ public class ToggleDouble {
      *
      * Call this method in your main op-mode loop
      *
-     * @param currentlyActuated the current state of the button that controls the toggle
+     * @param currentlyPressed the current state of the button that controls the toggle
      */
-    public void input(boolean currentlyActuated) {
+    public void input(boolean currentlyPressed) {
         //if the button is being pressed now and wasn't being pressed last time, change the value of the toggle
-        if (currentlyActuated && !previouslyActuated) toggle();
-        //change previoulyActuated to reflect the current state of the toggle
-        previouslyActuated = currentlyActuated;
+        if (currentlyPressed && !previouslyPressed) toggle();
+        //change previoulyPressed to reflect the current state of the toggle
+        previouslyPressed = currentlyPressed;
     }
 
     /**
