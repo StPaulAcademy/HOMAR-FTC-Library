@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import edu.spa.ftclib.internal.toggle.ToggleBoolean;
-import edu.spa.ftclib.internal.toggle.ToggleDouble;
-import edu.spa.ftclib.internal.toggle.ToggleInt;
+import edu.spa.ftclib.internal.state.ToggleBoolean;
+import edu.spa.ftclib.internal.state.ToggleDouble;
+import edu.spa.ftclib.internal.state.ToggleInt;
 
 /**
  * Created by Michaela on 1/7/2018.
