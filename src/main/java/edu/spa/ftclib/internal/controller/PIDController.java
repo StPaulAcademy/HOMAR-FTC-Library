@@ -8,20 +8,21 @@ package edu.spa.ftclib.internal.controller;
  */
 
 public class PIDController extends ControlAlgorithm {
+
     /**
      * The gain for the proportional part of the controller.
      */
-    public final double KP;
+    private double KP;
 
     /**
      * The gain for the integral part of the controller.
      */
-    public final double KI;
+    private double KI;
 
     /**
      * The gain for the derivative part of the controller.
      */
-    public final double KD;
+    private double KD;
 
     /** The output from the proportional part of the controller. */
     private double error = 0;
@@ -170,5 +171,29 @@ public class PIDController extends ControlAlgorithm {
         integral = inputI;
         derivative = inputD;
         timeAtUpdate = System.nanoTime();
+    }
+
+    public double getKP() {
+        return KP;
+    }
+
+    public void setKP(double KP) {
+        this.KP = KP;
+    }
+
+    public double getKI() {
+        return KI;
+    }
+
+    public void setKI(double KI) {
+        this.KI = KI;
+    }
+
+    public double getKD() {
+        return KD;
+    }
+
+    public void setKD(double KD) {
+        this.KD = KD;
     }
 }

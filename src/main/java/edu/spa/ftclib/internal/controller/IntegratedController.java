@@ -8,7 +8,7 @@ import edu.spa.ftclib.internal.sensor.Sensor;
 
 public class IntegratedController implements Controller, Targetable {
     public Sensor sensor;
-    ControlAlgorithm algorithm;
+    public ControlAlgorithm algorithm;
     private double target;
 
     public IntegratedController(Sensor sensor, ControlAlgorithm algorithm) {

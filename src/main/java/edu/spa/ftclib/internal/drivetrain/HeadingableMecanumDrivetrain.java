@@ -16,7 +16,7 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
      * @see edu.spa.ftclib.internal.controller.PIController
      * @see edu.spa.ftclib.internal.controller.PController
      */
-    private FinishableIntegratedController controller;
+    public FinishableIntegratedController controller;
 
     /**
      * The last time the heading was not within the heading tolerance.

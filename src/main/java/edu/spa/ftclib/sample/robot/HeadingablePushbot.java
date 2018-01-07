@@ -23,7 +23,7 @@ public class HeadingablePushbot extends Pushbot {
     public FinishableIntegratedController controller;
     public HeadingableTankDrivetrain drivetrain;
 
-    HeadingablePushbot(Telemetry telemetry, HardwareMap hardwareMap) {
+    public HeadingablePushbot(Telemetry telemetry, HardwareMap hardwareMap) {
         super(telemetry, hardwareMap);
 
         imu = hardwareMap.get(BNO055IMUImpl.class, "imu");

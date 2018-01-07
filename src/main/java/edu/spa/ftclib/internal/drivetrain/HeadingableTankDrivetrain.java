@@ -16,7 +16,7 @@ public class HeadingableTankDrivetrain extends TankDrivetrain implements Heading
      * @see edu.spa.ftclib.internal.controller.PIController
      * @see edu.spa.ftclib.internal.controller.Controller
      */
-    private FinishableIntegratedController controller;
+    public FinishableIntegratedController controller;
 
     /**
      * The last time the heading was not within the heading tolerance.
