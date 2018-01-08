@@ -1,5 +1,6 @@
 package edu.spa.ftclib.internal.controller;
 
+import edu.spa.ftclib.internal.sensor.DerivativeSensor;
 import edu.spa.ftclib.internal.sensor.Sensor;
 
 /**
@@ -25,6 +26,7 @@ public class IntegratedController implements Controller, Targetable {
     }
 
     public void update() {
+        if (sensor instanceof DerivativeSensor && algorithm instanceof DerivativeAlgorithm) ((DerivativeAlgorithm) algorithm).setDerivative(((DerivativeSensor) sensor).getDerivative());   //If both the sensor and the algorithm can handle derivatives, pass it along.
         algorithm.input(sensor.getValue());
     }
 

@@ -20,7 +20,7 @@ public class PushbotPIDTuner extends OpMode {
     @Override
     public void init() {
         HeadingablePushbot robot = new HeadingablePushbot(telemetry, hardwareMap);
-        tuner = new PIDTuner(robot.drivetrain, (PIDController) robot.controller.algorithm, gamepad1);
+        tuner = new PIDTuner(robot.drivetrain, (PIDController) robot.controller.algorithm, gamepad1, telemetry);
     }
 
     /**

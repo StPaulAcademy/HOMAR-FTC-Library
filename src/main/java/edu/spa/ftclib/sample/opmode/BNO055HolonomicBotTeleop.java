@@ -44,6 +44,6 @@ public class BNO055HolonomicBotTeleop extends OpMode {
         robot.drivetrain.setRotation(rotation);
 
         servoToggle.input(gamepad1.x);
-        robot.servo.setPosition(servoToggle.output());
+        //robot.servo.setPosition(servoToggle.output());
     }
 }

@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
  * Created by Gabriel on 2018-01-02.
  */
 
-public class IntegratingGyroscopeSensor implements Sensor {
+public class IntegratingGyroscopeSensor implements DerivativeSensor {
     IntegratingGyroscope gyro;
     HeadingConverter converter = new HeadingConverter();
     public IntegratingGyroscopeSensor(IntegratingGyroscope gyro) {
@@ -20,5 +20,10 @@ public class IntegratingGyroscopeSensor implements Sensor {
     public double getValue() {
         converter.update(gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZXY, AngleUnit.RADIANS).firstAngle);
         return converter.getConvertedHeading();
+    }
+
+    @Override
+    public double getDerivative() {
+        return gyro.getAngularVelocity(AngleUnit.RADIANS).zRotationRate;
     }
 }

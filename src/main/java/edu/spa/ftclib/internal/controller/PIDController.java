@@ -7,7 +7,7 @@ package edu.spa.ftclib.internal.controller;
  * The P stands for proportional, the I stands for integral, and the D stands for derivative, but you don't need to know calculus to use it.
  */
 
-public class PIDController extends ControlAlgorithm {
+public class PIDController extends ControlAlgorithm implements DerivativeAlgorithm {
 
     /**
      * The gain for the proportional part of the controller.
@@ -35,33 +35,21 @@ public class PIDController extends ControlAlgorithm {
     /**
      * The ouput from the integral part of the controller.
      */
-    private double integral;
+    private double integral = 0;
 
     /**
      * The output from the derivative part of the controller.
      */
-    private double derivative;
+    private double derivative = 0;
 
     /**
      * The time, in nanoseconds, of the last time of controller ran through the loop. Used when caluclating integral and derivative.
      */
     private long timeAtUpdate;
 
-    /**
-     * Gets the value of the integral part of the controller.
-     * @return The output of the integral calculation
-     */
-    public double getIntegral() {
-        return integral;
-    }
-
-    /**
-     * Gets the value of the derivative part of the controller.
-     * @return The output of the derivative calculation
-     */
-    public double getDerivative() {
-        return derivative;
-    }
+    private boolean integralSet = false;
+    private boolean derivativeSet = false;
+    private double derivativeAveraging = 0.95;
 
     /**
      * The constructor for the PID Controller.
@@ -129,48 +117,37 @@ public class PIDController extends ControlAlgorithm {
     public void input(double input) {
         long newTime = System.nanoTime();
         error = target-input;
-        integral += error*nanoToUnit(newTime-timeAtUpdate);
-        derivative = ((target-input-error)/nanoToUnit(newTime-timeAtUpdate));
+        if (!integralSet) integral += error*nanoToUnit(newTime-timeAtUpdate);
+        if (!derivativeSet) derivative = derivative*derivativeAveraging+(error/nanoToUnit(newTime-timeAtUpdate))*(1-derivativeAveraging);
         timeAtUpdate = newTime;
+        integralSet = false;
+        derivativeSet = false;
     }
 
     /**
-     * Does all of the fancy math, requiring only an input into the proportional and derivative parts of the controller.
-     * @param input The proportional input, such as the heading from a gyro
-     * @param inputD The derivative input, such as the angular velocity
+     * Gets the value of the integral part of the controller.
+     * @return The output of the integral calculation
      */
-    public void inputPD(double input, double inputD) {
-        long newTime = System.nanoTime();
-        error = target-input;
-        integral += error*nanoToUnit(newTime-timeAtUpdate);
-        derivative = inputD;
-        timeAtUpdate = newTime;
+    public double getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(double integral) {
+        this.integral = integral;
+        integralSet = true;
     }
 
     /**
-     * Does all of the fancy math, requiring an input into the proportional and integral parts of the controller.
-     * @param input The proportional input, such as the heading from a gyro
-     * @param inputI The integral input, such as a position if you were trying to maintain a linear velocity
+     * Gets the value of the derivative part of the controller.
+     * @return The output of the derivative calculation
      */
-    public void inputPI(double input, double inputI) {
-        long newTime = System.nanoTime();
-        error = target-input;
-        integral += inputI;
-        derivative = ((target-input-error)/nanoToUnit(newTime-timeAtUpdate));
-        timeAtUpdate = newTime;
+    public double getDerivative() {
+        return derivative;
     }
 
-    /**
-     * Does all of the fancy math, requiring an input into all three parts of the controller.
-     * @param input The proportional input, such as the heading from a gyro
-     * @param inputI The integral input, such as a position if you were trying to maintain a linear velocity
-     * @param inputD The derivative input, such as the angular velocity
-     */
-    public void inputPID(double input, double inputI, double inputD) {
-        error = target-input;
-        integral = inputI;
-        derivative = inputD;
-        timeAtUpdate = System.nanoTime();
+    public void setDerivative(double derivative) {
+        this.derivative = derivative;
+        derivativeSet = true;
     }
 
     public double getKP() {
@@ -195,5 +172,17 @@ public class PIDController extends ControlAlgorithm {
 
     public void setKD(double KD) {
         this.KD = KD;
+    }
+
+    public double getError() {
+        return error;
+    }
+
+    public double getDerivativeAveraging() {
+        return derivativeAveraging;
+    }
+
+    public void setDerivativeAveraging(double derivativeAveraging) {
+        this.derivativeAveraging = derivativeAveraging;
     }
 }

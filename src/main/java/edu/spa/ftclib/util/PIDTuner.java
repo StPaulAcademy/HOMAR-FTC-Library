@@ -2,6 +2,8 @@ package edu.spa.ftclib.util;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 import edu.spa.ftclib.internal.controller.PIDController;
 import edu.spa.ftclib.internal.drivetrain.Headingable;
 import edu.spa.ftclib.internal.state.Button;
@@ -18,6 +20,7 @@ import edu.spa.ftclib.internal.state.ToggleInt;
  *     <li>D-pad left: Increase step</li>
  *     <li>D-pad right: Decrease step</li>
  *     <li>X button: Change selected constant</li>
+ *     <li>Y button: Reset integral</li>
  *     <li>Right bumper: Pause automatic heading correction and rotate clockwise</li>
  *     <li>Left bumper: Pause automatic heading correction and rotate counterclockwise</li>
  *     <li>Both bumpers: Pause automatic heading correction and stop rotating</li>
@@ -29,6 +32,7 @@ public class PIDTuner {
     private Headingable drivetrain;
     private PIDController controller;
     private Gamepad gamepad;
+    private Telemetry telemetry;
     private double stepP = 0.1, stepI = 0.01, stepD = 0.01;
     private Button up = new Button();
     private Button down = new Button();
@@ -37,10 +41,11 @@ public class PIDTuner {
     private Button y = new Button();
     private ToggleInt selected = new ToggleInt(3);
 
-    public PIDTuner(Headingable drivetrain, PIDController controller, Gamepad gamepad) {
+    public PIDTuner(Headingable drivetrain, PIDController controller, Gamepad gamepad, Telemetry telemetry) {
         this.drivetrain = drivetrain;
         this.controller = controller;
         this.gamepad = gamepad;
+        this.telemetry = telemetry;
         drivetrain.setTargetHeading(0);
     }
 
@@ -105,9 +110,28 @@ public class PIDTuner {
             }
         }
 
+        if (y.onPress()) controller.resetIntegration();
+
         if (gamepad.left_bumper && gamepad.right_bumper) drivetrain.setRotation(0);
         else if (gamepad.left_bumper) drivetrain.setRotation(ROTATION_POWER);
         else if (gamepad.right_bumper) drivetrain.setRotation(-ROTATION_POWER);
         else drivetrain.updateHeading();
+
+        telemetry.addData("Controls", "X to select, Y to reset");
+        String[] KCaptions = new String[] {"KP", "KI", "KD"};
+        KCaptions[selected.output()] = "->"+KCaptions[selected.output()];
+        String[] stepCaptions = new String[] {"stepP", "stepI", "stepD"};
+        stepCaptions[selected.output()] = "->"+stepCaptions[selected.output()];
+        telemetry.addData(KCaptions[0], controller.getKP());
+        telemetry.addData(KCaptions[1], controller.getKI());
+        telemetry.addData(KCaptions[2], controller.getKD());
+        telemetry.addData(stepCaptions[0], stepP);
+        telemetry.addData(stepCaptions[1], stepI);
+        telemetry.addData(stepCaptions[2], stepD);
+        telemetry.addData("Heading", drivetrain.getCurrentHeading());
+        telemetry.addData("Error", controller.getError());
+        telemetry.addData("Integral", controller.getIntegral());
+        telemetry.addData("Derivative", controller.getDerivative());
+        telemetry.update();
     }
 }
