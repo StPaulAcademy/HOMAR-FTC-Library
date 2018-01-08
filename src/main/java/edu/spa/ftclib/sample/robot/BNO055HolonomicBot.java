@@ -27,9 +27,9 @@ public class BNO055HolonomicBot extends Robot {
     public DcMotor backLeft;
     public DcMotor backRight;
 
-    public Servo servo;
+    //public Servo servo;
 
-    public ServoActivator servoActivator;
+    //public ServoActivator servoActivator;
 
     public HeadingableMecanumDrivetrain drivetrain;
     public FinishableIntegratedController controller;
@@ -49,13 +49,13 @@ public class BNO055HolonomicBot extends Robot {
         imu.initialize(parameters);
         while (!imu.isGyroCalibrated());
 
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "driveFrontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "driveFrontRight");
+        backLeft = hardwareMap.get(DcMotor.class, "driveBackLeft");
+        backRight = hardwareMap.get(DcMotor.class, "driveBackRight");
 
-        servo = hardwareMap.get(Servo.class, "servo");
-        servoActivator = new ServoActivator(servo, 1, 0);
+        //servo = hardwareMap.get(Servo.class, "servo");
+        //servoActivator = new ServoActivator(servo, 1, 0);
 
         controller = new FinishableIntegratedController(new IntegratingGyroscopeSensor(imu), new PIDController(1, 1, 1), new ErrorTimeThresholdFinishingAlgorithm(Math.PI/50, 1));
         drivetrain = new HeadingableMecanumDrivetrain(new DcMotor[]{frontLeft, frontRight, backLeft, backRight}, controller);
@@ -70,6 +70,6 @@ public class BNO055HolonomicBot extends Robot {
         backLeft.setPower(0);
         backRight.setPower(0);
 
-        servoActivator.deactivate();
+        //servoActivator.deactivate();
     }
 }

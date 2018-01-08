@@ -1,5 +1,6 @@
 package edu.spa.ftclib.util;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.util.ClassUtil;
@@ -15,7 +16,7 @@ import org.firstinspires.ftc.robotcore.internal.opmode.ClassManager;
  * <p />
  * To use, go to {@code FtcOpModeRegister.java} in FtcRobotController -> java -> org.firstinspires.ftc.robotcontroller -> internal.
  * In the {@code register} method, create a new PackageRegistrar with the given {@link OpModeManager}.
- * Then you can call {@link #registerPackage} for each package of op-modes you want to enable.
+ * Then you can call {@link #registerPackageAll} or {@link #registerPackageDisabled} for each package of op-modes you want to enable.
  * If you only want to enable a single class, use {@link ClassRegistrar}.
  * <p />
  * Inspired by {@link org.firstinspires.ftc.robotcore.internal.opmode.AnnotatedOpModeClassFilter}.
@@ -27,8 +28,12 @@ public class PackageRegistrar {
     public PackageRegistrar(OpModeManager manager) {
         this.manager = manager;
     }
-    public void registerPackage(String packageName) {
-        ClassManager.getInstance().registerFilter(new PackageClassFilter(packageName, manager));
+    public void registerPackageAll(String packageName) {
+        ClassManager.getInstance().registerFilter(new PackageClassFilter(packageName, manager, false));
+        ClassManager.getInstance().processAllClasses();
+    }
+    public void registerPackageDisabled(String packageName) {
+        ClassManager.getInstance().registerFilter(new PackageClassFilter(packageName, manager, true));
         ClassManager.getInstance().processAllClasses();
     }
 
@@ -39,9 +44,11 @@ public class PackageRegistrar {
     class PackageClassFilter implements ClassFilter {
         String packageName;
         ClassRegistrar classRegistrar;
-        private PackageClassFilter(String packageName, OpModeManager manager) {
+        boolean onlyDisabled;
+        private PackageClassFilter(String packageName, OpModeManager manager, boolean onlyDisabled) {
             this.packageName = packageName;
             classRegistrar = new ClassRegistrar(manager);
+            this.onlyDisabled = onlyDisabled;
         }
 
         /**
@@ -66,7 +73,10 @@ public class PackageRegistrar {
         //So I don't actually know Java reflection very well. I'm just good at following patterns (hence the "inspired by AnnotatedOpModeClassFilter"). Tell me if I'm doing anything wrong. Here we go…
         @SuppressWarnings("unchecked")  //The "ClassUtil.inheritsFrom" part does actually make sure that "clazz" is an OpMode. The compiler just doesn't know that.
         public void filterClass(Class clazz) {
-            if (clazz.getPackage().getName().equals(packageName) && ClassUtil.inheritsFrom(clazz, OpMode.class)) classRegistrar.registerClass((Class<OpMode>) clazz);   //Register each class that is both in the given package and a subclass of OpMode
+            if (onlyDisabled && !clazz.isAnnotationPresent(Disabled.class)) return; //Stop if we only want to register disabled classes and this class isn't disabled
+            if (!clazz.getPackage().getName().equals(packageName)) return;  //Stop if the class isn't in the given package
+            if(!ClassUtil.inheritsFrom(clazz, OpMode.class)) return;    //Stop if the class isn't an OpMode
+            classRegistrar.registerClass((Class<OpMode>) clazz);    //If the class passes all the checks, register it
         }
 
         @Override
