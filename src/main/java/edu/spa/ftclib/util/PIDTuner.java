@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+import edu.spa.ftclib.internal.controller.DerivativeAlgorithm;
 import edu.spa.ftclib.internal.controller.PIDController;
 import edu.spa.ftclib.internal.drivetrain.Headingable;
 import edu.spa.ftclib.internal.state.Button;
+import edu.spa.ftclib.internal.state.ToggleBoolean;
 import edu.spa.ftclib.internal.state.ToggleInt;
 
 /**
@@ -21,6 +23,7 @@ import edu.spa.ftclib.internal.state.ToggleInt;
  *     <li>D-pad right: Decrease step</li>
  *     <li>X button: Change selected constant</li>
  *     <li>Y button: Reset integral</li>
+ *     <li>A button: Toggle pause</li>
  *     <li>Right bumper: Pause automatic heading correction and rotate clockwise</li>
  *     <li>Left bumper: Pause automatic heading correction and rotate counterclockwise</li>
  *     <li>Both bumpers: Pause automatic heading correction and stop rotating</li>
@@ -28,17 +31,18 @@ import edu.spa.ftclib.internal.state.ToggleInt;
  */
 
 public class PIDTuner {
-    static final private double ROTATION_POWER = 0.25;
+    static final private double ROTATION_POWER = 0.5;
     private Headingable drivetrain;
     private PIDController controller;
     private Gamepad gamepad;
     private Telemetry telemetry;
-    private double stepP = 0.1, stepI = 0.01, stepD = 0.01;
+    private double stepP = 1, stepI = 0.01, stepD = 0.01;
     private Button up = new Button();
     private Button down = new Button();
     private Button left = new Button();
     private Button right = new Button();
     private Button y = new Button();
+    private ToggleBoolean a = new ToggleBoolean();
     private ToggleInt selected = new ToggleInt(3);
 
     public PIDTuner(Headingable drivetrain, PIDController controller, Gamepad gamepad, Telemetry telemetry) {
@@ -56,6 +60,7 @@ public class PIDTuner {
         right.input(gamepad.dpad_right);
         y.input(gamepad.y);
         selected.input(gamepad.x);
+        a.input(gamepad.a);
 
         if (up.onPress()) {
             switch (selected.output()) {
@@ -112,12 +117,19 @@ public class PIDTuner {
 
         if (y.onPress()) controller.resetIntegration();
 
-        if (gamepad.left_bumper && gamepad.right_bumper) drivetrain.setRotation(0);
-        else if (gamepad.left_bumper) drivetrain.setRotation(ROTATION_POWER);
-        else if (gamepad.right_bumper) drivetrain.setRotation(-ROTATION_POWER);
-        else drivetrain.updateHeading();
+        if (a.output()) {
+            telemetry.addData("Status", "Paused");
+            drivetrain.setRotation(0);
+        }
+        else {
+            telemetry.addData("Status", "Running");
+            if (gamepad.left_bumper && gamepad.right_bumper) drivetrain.setRotation(0);
+            else if (gamepad.left_bumper) drivetrain.setRotation(ROTATION_POWER);
+            else if (gamepad.right_bumper) drivetrain.setRotation(-ROTATION_POWER);
+            else drivetrain.updateHeading();
+        }
 
-        telemetry.addData("Controls", "X to select, Y to reset");
+        telemetry.addData("Controls", "X to select, Y to reset, A to pause");
         String[] KCaptions = new String[] {"KP", "KI", "KD"};
         KCaptions[selected.output()] = "->"+KCaptions[selected.output()];
         String[] stepCaptions = new String[] {"stepP", "stepI", "stepD"};
@@ -128,10 +140,10 @@ public class PIDTuner {
         telemetry.addData(stepCaptions[0], stepP);
         telemetry.addData(stepCaptions[1], stepI);
         telemetry.addData(stepCaptions[2], stepD);
-        telemetry.addData("Heading", drivetrain.getCurrentHeading());
-        telemetry.addData("Error", controller.getError());
+        telemetry.addData("Heading*", drivetrain.getCurrentHeading()*1000);
+        telemetry.addData("Error*", controller.getError()*1000);
         telemetry.addData("Integral", controller.getIntegral());
-        telemetry.addData("Derivative", controller.getDerivative());
+        telemetry.addData("Derivative*", controller.getDerivative()*1000);
         telemetry.update();
     }
 }

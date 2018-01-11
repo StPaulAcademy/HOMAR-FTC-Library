@@ -12,7 +12,7 @@ import edu.spa.ftclib.sample.robot.BNO055HolonomicBot;
  * A basic tele-op using the {@link BNO055HolonomicBot}. Moves the robot based on the gamepad and toggles the servo through various positions when "x" is pressed.
  */
 @TeleOp(name = "BNO055 Holonomic Bot Tele-Op", group = "sample")
-@Disabled
+//@Disabled
 
 public class BNO055HolonomicBotTeleop extends OpMode {
     private BNO055HolonomicBot robot;

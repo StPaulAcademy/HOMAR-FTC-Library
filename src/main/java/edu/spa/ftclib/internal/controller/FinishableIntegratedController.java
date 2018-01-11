@@ -14,10 +14,10 @@ public class FinishableIntegratedController extends IntegratedController {
     }
 
     @Override
-    public void update() {
-        double input = sensor.getValue();
-        algorithm.input(input);
-        finisher.input(input);
+    public double update() {
+        double sensorValue = super.update();
+        finisher.input(sensorValue);
+        return sensorValue;
     }
 
     public boolean finished() {

@@ -1,5 +1,7 @@
 package edu.spa.ftclib.internal.controller;
 
+import com.qualcomm.robotcore.util.Range;
+
 /**
  * Created by Gabriel on 2/25/2017; edited substantially on 2017-12-28.
  * A PID controller, which allows the robot to move to a specific position and correct itself so that it lands right on (or very close).
@@ -48,8 +50,10 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     private long timeAtUpdate;
 
     private boolean integralSet = false;
-    private boolean derivativeSet = false;
+    public boolean derivativeSet = false;
     private double derivativeAveraging = 0.95;
+
+    private double maxErrorForIntegral = Double.POSITIVE_INFINITY;
 
     /**
      * The constructor for the PID Controller.
@@ -117,7 +121,7 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     public void input(double input) {
         long newTime = System.nanoTime();
         error = target-input;
-        if (!integralSet) integral += error*nanoToUnit(newTime-timeAtUpdate);
+        if (!integralSet) integral += Range.clip(error, -maxErrorForIntegral, maxErrorForIntegral)*nanoToUnit(newTime-timeAtUpdate);
         if (!derivativeSet) derivative = derivative*derivativeAveraging+(error/nanoToUnit(newTime-timeAtUpdate))*(1-derivativeAveraging);
         timeAtUpdate = newTime;
         integralSet = false;
@@ -184,5 +188,13 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
 
     public void setDerivativeAveraging(double derivativeAveraging) {
         this.derivativeAveraging = derivativeAveraging;
+    }
+
+    public double getMaxErrorForIntegral() {
+        return maxErrorForIntegral;
+    }
+
+    public void setMaxErrorForIntegral(double maxErrorForIntegral) {
+        this.maxErrorForIntegral = Math.abs(maxErrorForIntegral);
     }
 }

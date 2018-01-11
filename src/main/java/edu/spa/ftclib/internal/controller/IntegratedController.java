@@ -25,9 +25,11 @@ public class IntegratedController implements Controller, Targetable {
         return target;
     }
 
-    public void update() {
+    public double update() {
         if (sensor instanceof DerivativeSensor && algorithm instanceof DerivativeAlgorithm) ((DerivativeAlgorithm) algorithm).setDerivative(((DerivativeSensor) sensor).getDerivative());   //If both the sensor and the algorithm can handle derivatives, pass it along.
-        algorithm.input(sensor.getValue());
+        double sensorValue = sensor.getValue();
+        algorithm.input(sensorValue);
+        return sensorValue;
     }
 
     @Override
