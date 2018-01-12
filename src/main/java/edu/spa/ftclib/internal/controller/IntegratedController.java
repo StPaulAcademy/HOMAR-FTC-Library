@@ -1,5 +1,6 @@
 package edu.spa.ftclib.internal.controller;
 
+import edu.spa.ftclib.internal.Global;
 import edu.spa.ftclib.internal.sensor.DerivativeSensor;
 import edu.spa.ftclib.internal.sensor.Sensor;
 
@@ -20,6 +21,7 @@ public class IntegratedController implements Controller, Targetable {
     public void setTarget(double target) {
         this.target = target;
         algorithm.setTarget(target);
+        update();
     }
 
     public double getTarget() {

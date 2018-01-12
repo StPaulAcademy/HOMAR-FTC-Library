@@ -32,7 +32,7 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     /**
      * The position the robot is trying to get to.
      */
-    private double target = Math.PI/2;
+    private double target = 0;
 
     /**
      * The ouput from the integral part of the controller.

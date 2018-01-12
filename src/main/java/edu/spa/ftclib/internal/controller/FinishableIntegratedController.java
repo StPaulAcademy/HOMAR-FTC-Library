@@ -1,5 +1,6 @@
 package edu.spa.ftclib.internal.controller;
 
+import edu.spa.ftclib.internal.Global;
 import edu.spa.ftclib.internal.sensor.Sensor;
 
 /**
@@ -11,6 +12,12 @@ public class FinishableIntegratedController extends IntegratedController {
     public FinishableIntegratedController(Sensor sensor, ControlAlgorithm algorithm, FinishingAlgorithm finisher) {
         super(sensor, algorithm);
         this.finisher = finisher;
+    }
+
+    @Override
+    public void setTarget(double target) {
+        finisher.setTarget(target); //We need to set the finisher's target before super.setTarget updates the finisher. This mistake took a while to find.
+        super.setTarget(target);
     }
 
     @Override
