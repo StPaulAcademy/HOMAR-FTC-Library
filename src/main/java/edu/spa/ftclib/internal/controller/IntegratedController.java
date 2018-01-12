@@ -19,6 +19,7 @@ public class IntegratedController implements Controller, Targetable {
 
     public void setTarget(double target) {
         this.target = target;
+        algorithm.setTarget(target);
     }
 
     public double getTarget() {

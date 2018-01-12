@@ -48,6 +48,7 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
     @Override
     public void setTargetHeading(double targetHeading) {
         this.targetHeading = targetHeading;
+        controller.setTarget(targetHeading);
     }
 
     /**
@@ -81,7 +82,9 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
 
     @Override
     public void rotate() {
-        while (isRotating()) updateHeading();
+        while (isRotating()) {
+            updateHeading();
+        }
         finishRotating();
     }
 
