@@ -1,6 +1,5 @@
 package edu.spa.ftclib.internal.controller;
 
-import edu.spa.ftclib.internal.Global;
 import edu.spa.ftclib.internal.sensor.DerivativeSensor;
 import edu.spa.ftclib.internal.sensor.Sensor;
 

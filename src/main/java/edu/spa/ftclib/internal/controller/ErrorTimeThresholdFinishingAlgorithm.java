@@ -1,6 +1,6 @@
 package edu.spa.ftclib.internal.controller;
 
-import edu.spa.ftclib.internal.Global;
+//import edu.spa.ftclib.internal.Global;    //For testing
 
 /**
  * Created by Gabriel on 2017-12-29.
@@ -42,19 +42,19 @@ public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
 
     @Override
     public boolean finished() {
-        Global.telemetry.addData("finishing", System.nanoTime()-lastOutOfRange);
-        Global.telemetry.addData("threshold", timeThreshold);
-        Global.telemetry.addData("withinRange", withinRange);
+        /*Global.telemetry.addData("finishing", System.nanoTime()-lastOutOfRange);  //For testing
+        //Global.telemetry.addData("threshold", timeThreshold);
+        Global.telemetry.addData("withinRange", withinRange);*/
         return ((System.nanoTime()-lastOutOfRange) > timeThreshold) && withinRange;
     }
 
     @Override
     public void input(double input) {
         this.input = input;
-        Global.telemetry.addData("error", getTarget()-input);
+        /*Global.telemetry.addData("error", getTarget()-input); //For testing
         Global.telemetry.addData("input", input);
         Global.telemetry.addData("target", getTarget());
-        Global.telemetry.addData("tolerance", errorTolerance);
+        Global.telemetry.addData("tolerance", errorTolerance);*/
         if (Math.abs(getTarget()-input) > errorTolerance) {
             lastOutOfRange = System.nanoTime();
             withinRange = false;
