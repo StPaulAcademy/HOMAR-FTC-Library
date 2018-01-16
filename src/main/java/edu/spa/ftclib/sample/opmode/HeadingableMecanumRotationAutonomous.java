@@ -6,6 +6,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import edu.spa.ftclib.internal.controller.ErrorTimeThresholdFinishingAlgorithm;
 import edu.spa.ftclib.internal.controller.FinishableIntegratedController;
@@ -58,13 +59,23 @@ public class HeadingableMecanumRotationAutonomous extends LinearOpMode {
         imu.initialize(parameters);
         while (!imu.isGyroCalibrated());
 
-        controller = new FinishableIntegratedController(new IntegratingGyroscopeSensor(imu), new PIDController(1,0.01,0), new ErrorTimeThresholdFinishingAlgorithm(Math.PI/50, 1));
+
+        PIDController pid = new PIDController(1.5, 0.05, 0);
+        pid.setMaxErrorForIntegral(0.002);
+
+        controller = new FinishableIntegratedController(new IntegratingGyroscopeSensor(imu), pid, new ErrorTimeThresholdFinishingAlgorithm(Math.PI/50, 1));
         drivetrain = new HeadingableMecanumDrivetrain(new DcMotor[]{frontLeft,frontRight, backLeft, backRight}, controller);
+        for (DcMotor motor : drivetrain.motors) motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        for (DcMotor motor : drivetrain.motors) motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
 
         drivetrain.setTargetHeading(Math.PI/2);
-        drivetrain.rotate();
+        while (drivetrain.isRotating()) {
+            drivetrain.updateHeading();
+            doTelemetry();
+        }
+        //drivetrain.rotate();
         sleep(1000);
 
         drivetrain.setTargetHeading(-Math.PI/2);
@@ -77,5 +88,17 @@ public class HeadingableMecanumRotationAutonomous extends LinearOpMode {
 
         drivetrain.setTargetHeading(0);
         while (opModeIsActive()) drivetrain.updateHeading();
+    }
+
+    void doTelemetry() {
+        PIDController pid = (PIDController) drivetrain.controller.algorithm;
+        telemetry.addData("heading, target", drivetrain.controller.getSensorValue()+","+pid.getTarget());
+        telemetry.addData("KP", pid.getKP());
+        telemetry.addData("KI", pid.getKI());
+        telemetry.addData("KD", pid.getKD());
+        telemetry.addData("error", pid.getError());
+        telemetry.addData("integral", pid.getIntegral());
+        telemetry.addData("derivative", pid.getDerivative());
+        telemetry.update();
     }
 }
