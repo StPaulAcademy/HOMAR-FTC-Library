@@ -2,8 +2,6 @@ package edu.spa.ftclib.internal.controller;
 
 import com.qualcomm.robotcore.util.Range;
 
-import edu.spa.ftclib.internal.Global;
-
 /**
  * Created by Gabriel on 2/25/2017; edited substantially on 2017-12-28.
  * A PID controller, which allows the robot to move to a specific position and correct itself so that it lands right on (or very close).
