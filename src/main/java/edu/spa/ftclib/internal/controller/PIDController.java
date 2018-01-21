@@ -2,6 +2,8 @@ package edu.spa.ftclib.internal.controller;
 
 import com.qualcomm.robotcore.util.Range;
 
+import edu.spa.ftclib.internal.Global;
+
 /**
  * Created by Gabriel on 2/25/2017; edited substantially on 2017-12-28.
  * A PID controller, which allows the robot to move to a specific position and correct itself so that it lands right on (or very close).
@@ -50,10 +52,12 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     private long timeAtUpdate;
 
     private boolean integralSet = false;
-    public boolean derivativeSet = false;
+    private boolean derivativeSet = false;
     private double derivativeAveraging = 0.95;
+    private boolean processManualDerivative = false;
 
     private double maxErrorForIntegral = Double.POSITIVE_INFINITY;
+    private double maxDerivative = Double.POSITIVE_INFINITY;
 
     /**
      * The constructor for the PID Controller.
@@ -150,7 +154,9 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     }
 
     public void setDerivative(double derivative) {
-        this.derivative = derivative;
+        if (processManualDerivative) derivativeAveraging = Range.clip(derivativeAveraging, -maxErrorForIntegral, maxErrorForIntegral);
+        if (processManualDerivative) this.derivative = this.derivative*derivativeAveraging+derivative*(1-derivativeAveraging);
+        else this.derivative = derivative;
         derivativeSet = true;
     }
 
@@ -196,5 +202,21 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
 
     public void setMaxErrorForIntegral(double maxErrorForIntegral) {
         this.maxErrorForIntegral = Math.abs(maxErrorForIntegral);
+    }
+
+    public boolean isProcessManualDerivative() {
+        return processManualDerivative;
+    }
+
+    public void setProcessManualDerivative(boolean processManualDerivative) {
+        this.processManualDerivative = processManualDerivative;
+    }
+
+    public double getMaxDerivative() {
+        return maxDerivative;
+    }
+
+    public void setMaxDerivative(double maxDerivative) {
+        this.maxDerivative = Math.abs(maxDerivative);
     }
 }

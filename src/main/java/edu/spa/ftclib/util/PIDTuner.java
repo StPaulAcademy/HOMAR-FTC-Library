@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-import edu.spa.ftclib.internal.controller.DerivativeAlgorithm;
 import edu.spa.ftclib.internal.controller.PIDController;
 import edu.spa.ftclib.internal.drivetrain.Headingable;
 import edu.spa.ftclib.internal.state.Button;
