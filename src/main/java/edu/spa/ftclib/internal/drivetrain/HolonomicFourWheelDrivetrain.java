@@ -89,7 +89,7 @@ abstract public class HolonomicFourWheelDrivetrain extends Drivetrain implements
 
     /**
      * Re-calculate the powers for each of the motors (called after a velocity, rotation, or course change).
-     * @return an array of motorPowers, which is then sent to the motors to move the robot
+     * @return an array of motor powers
      */
     protected double[] calculateMotorPowers() {
         double[] motorPowers = new double[4]; //creates a array to put the motor powers into

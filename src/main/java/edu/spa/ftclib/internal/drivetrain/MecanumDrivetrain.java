@@ -22,7 +22,7 @@ public class MecanumDrivetrain extends HolonomicFourWheelDrivetrain {
     /**
      *
      * @param course the angle that you want the robot to move along
-     * @param wheelAngle the array of angles that the actual moving parts of the wheels are at
+     * @param wheelAngle the angle of the actual moving part of the wheel
      * @return a number between zero and one, which says what percentage of the speed a wheel should move at. Is then multiplied by the velocity
      */
     @Override
