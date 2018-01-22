@@ -7,7 +7,7 @@ package edu.spa.ftclib.internal.controller;
 
 public class PController extends PIDController {
     /**
-     * The constructor for the controller. Creates a PID controller with KD==KI==0.
+     * The constructor for the controller. Creates a PID controller with KD=KI=0.
      * @param KP The gain for the proportional part of the controller
      */
     public PController(double KP) {
