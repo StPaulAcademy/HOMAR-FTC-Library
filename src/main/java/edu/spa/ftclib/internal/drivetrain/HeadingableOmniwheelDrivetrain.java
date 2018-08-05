@@ -9,7 +9,7 @@ import edu.spa.ftclib.internal.controller.FinishableIntegratedController;
  * An Omniwheel Drivetrain with some sort of heading sensor, such as a gyro. Uses the sensor and a controller specified by the user to control the system.
  */
 
-public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implements Headingable {
+public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implements Headingable, Extrinsicable {
     /**
      * The controller being used.
      * @see edu.spa.ftclib.internal.controller.PIDController
@@ -28,14 +28,20 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
      * The target heading
      */
     private double targetHeading = 0;
+
+    /**
+     * Whether the drivetrain is operating extrinsically
+     */
+    private boolean extrinsic;
+
     /**
      * The constructor for the drivetrain.
      * @param motors The array of motors that you give the constructor so that it can find the hardware
      * @param controller Which controller you want the system to use.
      *                   @see edu.spa.ftclib.internal.controller.PIDController
      */
-    public HeadingableOmniwheelDrivetrain(DcMotor[] motors, FinishableIntegratedController controller) {
-        super(motors);
+    public HeadingableOmniwheelDrivetrain(DcMotor[] motors, boolean diagonal, FinishableIntegratedController controller) {
+        super(motors, diagonal);
         this.controller = controller;
     }
 
@@ -84,6 +90,12 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
         finishRotating();
     }
 
+    @Override
+    public void setCourse(double course) {
+        if (extrinsic) super.setCourse(course-getCurrentHeading());
+        else super.setCourse(course);
+    }
+
     /**
      * Use this as a loop condition (with {@link #updateHeading in the loop body) if you want to turn to a specific heading and then move on to other code.
      *
@@ -99,5 +111,15 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
      */
     @Override
     public void finishRotating() {
+    }
+
+    @Override
+    public void setExtrinsic(boolean extrinsic) {
+        this.extrinsic = extrinsic;
+    }
+
+    @Override
+    public boolean getExtrinsic() {
+        return extrinsic;
     }
 }

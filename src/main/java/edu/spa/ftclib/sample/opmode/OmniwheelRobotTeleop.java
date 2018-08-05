@@ -29,7 +29,7 @@ public class OmniwheelRobotTeleop extends OpMode {
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
 
-        drivetrain = new OmniwheelDrivetrain(new DcMotor[]{frontLeft, frontRight, backLeft, backRight});
+        drivetrain = new OmniwheelDrivetrain(new DcMotor[]{frontLeft, frontRight, backLeft, backRight}, true);
     }
 
     /**

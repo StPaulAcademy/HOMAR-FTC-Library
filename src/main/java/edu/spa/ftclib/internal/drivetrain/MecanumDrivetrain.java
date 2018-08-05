@@ -15,7 +15,7 @@ public class MecanumDrivetrain extends HolonomicFourWheelDrivetrain {
      */
     public MecanumDrivetrain(DcMotor[] motors) {
         super(motors, new double[] {
-                Math.PI/4, Math.PI/4, -Math.PI/4, -Math.PI/4 //the angles of the wheels on a mecanum drivetrain
+                -3*Math.PI/4, 3*Math.PI/4, -Math.PI/4, Math.PI/4
         });
     }
 
@@ -27,6 +27,6 @@ public class MecanumDrivetrain extends HolonomicFourWheelDrivetrain {
      */
     @Override
     double calculateWheelCoefficient(double course, double wheelAngle) {
-        return Math.cos(course)-Math.sin(course)/Math.tan(wheelAngle); //fancy math that calculates the wheel coefficient
+        return (Math.cos(course)-Math.sin(course)/Math.tan(wheelAngle))*Math.signum(wheelAngle); //fancy math that calculates the wheel coefficient
     }
 }

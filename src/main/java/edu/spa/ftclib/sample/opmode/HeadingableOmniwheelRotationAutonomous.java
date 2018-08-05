@@ -58,7 +58,7 @@ public class HeadingableOmniwheelRotationAutonomous extends LinearOpMode {
         while (!imu.isGyroCalibrated());
 
         controller = new FinishableIntegratedController(new IntegratingGyroscopeSensor(imu), new PIDController(1,1,1), new ErrorTimeThresholdFinishingAlgorithm(Math.PI/50, 1));
-        drivetrain = new HeadingableOmniwheelDrivetrain(new DcMotor[]{frontLeft,frontRight, backLeft, backRight}, controller);
+        drivetrain = new HeadingableOmniwheelDrivetrain(new DcMotor[]{frontLeft,frontRight, backLeft, backRight}, true, controller);
 
         waitForStart();
 

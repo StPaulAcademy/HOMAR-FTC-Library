@@ -36,8 +36,8 @@ public class BNO055HolonomicBotTeleop extends OpMode {
     @Override
     public void loop() {
         double course = Math.atan2(-gamepad1.right_stick_y, gamepad1.right_stick_x) - Math.PI/2;
-        double velocity = Math.hypot(gamepad1.right_stick_y, gamepad1.right_stick_y);
-        double rotation = gamepad1.left_stick_x;
+        double velocity = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
+        double rotation = -gamepad1.left_stick_x;
 
         robot.drivetrain.setCourse(course);
         robot.drivetrain.setVelocity(velocity);

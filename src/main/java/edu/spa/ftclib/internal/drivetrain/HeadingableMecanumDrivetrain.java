@@ -9,7 +9,7 @@ import edu.spa.ftclib.internal.controller.FinishableIntegratedController;
  * A Mecanum Drivetrain with some sort of heading sensor, such as a gyro. Uses the sensor and a controller specified by the user to control the system.
  */
 
-public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements Headingable {
+public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements Headingable, Extrinsicable {
     /**
      * The controller being used.
      * @see edu.spa.ftclib.internal.controller.PIDController
@@ -28,6 +28,11 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
      * The target heading
      */
     private double targetHeading = 0;
+
+    /**
+     * Whether the drivetrain is operating extrinsically
+     */
+    private boolean extrinsic;
 
     /**
      * The constructor for the drivetrain.
@@ -88,6 +93,12 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
         finishRotating();
     }
 
+    @Override
+    public void setCourse(double course) {
+        if (extrinsic) super.setCourse(course-getCurrentHeading());
+        else super.setCourse(course);
+    }
+
     /**
      * Use this as a loop condition (with {@link #updateHeading in the loop body) if you want to turn to a specific heading and then move on to other code.
      *
@@ -103,5 +114,15 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
      */
     @Override
     public void finishRotating() {
+    }
+
+    @Override
+    public void setExtrinsic(boolean extrinsic) {
+        this.extrinsic = extrinsic;
+    }
+
+    @Override
+    public boolean getExtrinsic() {
+        return extrinsic;
     }
 }

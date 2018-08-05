@@ -1,6 +1,7 @@
 package edu.spa.ftclib.sample.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import edu.spa.ftclib.internal.drivetrain.MecanumDrivetrain;
@@ -8,6 +9,8 @@ import edu.spa.ftclib.internal.drivetrain.MecanumDrivetrain;
 /**
  * Created by Michaela on 1/3/2018.
  */
+
+@TeleOp(name = "Mecanum Robot Tele-op", group = "sample")
 
 public class MecanumRobotTeleop extends OpMode {
     public DcMotor frontLeft;
@@ -24,10 +27,10 @@ public class MecanumRobotTeleop extends OpMode {
      */
     @Override
     public void init() {
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "driveFrontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "driveFrontRight");
+        backLeft = hardwareMap.get(DcMotor.class, "driveBackLeft");
+        backRight = hardwareMap.get(DcMotor.class, "driveBackRight");
 
         drivetrain = new MecanumDrivetrain(new DcMotor[]{frontLeft, frontRight, backLeft, backRight});
     }
@@ -40,12 +43,17 @@ public class MecanumRobotTeleop extends OpMode {
     @Override
     public void loop() {
         double course = Math.atan2(-gamepad1.right_stick_y, gamepad1.right_stick_x) - Math.PI/2;
-        double velocity = Math.hypot(gamepad1.right_stick_y, gamepad1.right_stick_y);
-        double rotation = gamepad1.left_stick_x;
+        double velocity = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
+        double rotation = -gamepad1.left_stick_x;
 
         drivetrain.setCourse(course);
         drivetrain.setVelocity(velocity);
         drivetrain.setRotation(rotation);
+
+        telemetry.addData("course", course);
+        telemetry.addData("velocity", velocity);
+        telemetry.addData("rotation", rotation);
+        telemetry.update();
     }
 }
 

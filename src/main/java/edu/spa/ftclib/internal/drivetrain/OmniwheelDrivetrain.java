@@ -10,18 +10,18 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class OmniwheelDrivetrain extends HolonomicFourWheelDrivetrain {
 
     /**
-     *
      * @param motors the array of motors that you give the constructor so that it can find the hardware
      */
-    public OmniwheelDrivetrain(DcMotor[] motors) {
-        super(motors, new double[] {
-                Math.PI/4, -Math.PI/4, 3*Math.PI/4, -3*Math.PI/4 //the wheel angles on an omniwheel drivetrain
+    public OmniwheelDrivetrain(DcMotor[] motors, boolean diagonal) {    //TODO: instead of diagonal/not, take a number for wheel angle (default can be diagonal)
+        super(motors, diagonal ? new double[]{
+                Math.PI / 4, -Math.PI / 4, 3 * Math.PI / 4, -3 * Math.PI / 4 //the wheel angles on an omniwheel drivetrain
+        } : new double[]{
+                0, -Math.PI/2, -Math.PI, Math.PI/2 //the wheel angles on an omniwheel drivetrain
         });
     }
 
     /**
-     *
-     * @param course the angle that you want the robot to move along
+     * @param course     the angle that you want the robot to move along
      * @param wheelAngle the array of angles that the actual moving parts of the wheels are at
      * @return a number between zero and one, which says what percentage of the speed a wheel should move at. Is then multiplied by the velocity
      */
