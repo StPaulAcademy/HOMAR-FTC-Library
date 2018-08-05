@@ -9,6 +9,13 @@ public class ToggleBoolean {
     private boolean toggle = false; //Current state of the toggle
     private boolean previouslyPressed = false; //Was the input device (whatever is passed to input) true last time?
 
+    public ToggleBoolean() {
+    }
+
+    public ToggleBoolean(boolean startingToggle) {
+        toggle = startingToggle;
+    }
+
     /**
      * Call this method in your main op-mode loop
      * @param currentlyPressed the state of the input device you want to use to control the toggle

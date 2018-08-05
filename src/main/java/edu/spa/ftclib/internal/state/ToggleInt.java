@@ -8,7 +8,7 @@ package edu.spa.ftclib.internal.state;
  */
 
 public class ToggleInt {
-    private int toggle = 0; //Current state of the toggle
+    private int toggle; //Current state of the toggle
     private boolean previouslyPressed = false; //Was the input device (whatever is passed to input) true last time?
     private final int maxToggle; //the number of states that you want to toggle through
 
@@ -17,7 +17,12 @@ public class ToggleInt {
      * @param maxToggle the number of states that you want to toggle through
      */
     public ToggleInt(int maxToggle) {   //Pass this the number of values you want the toggle to have. When the toggle is about to reach this number, it will go back to 0.
+        this(maxToggle, 0);
+    }
+
+    public ToggleInt(int maxToggle, int startingToggle) {
         this.maxToggle = maxToggle;
+        toggle = startingToggle;
     }
 
     /**

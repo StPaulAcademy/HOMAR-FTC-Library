@@ -6,7 +6,7 @@ package edu.spa.ftclib.internal.state;
  */
 
 public class ToggleDouble {
-    private int toggleIndex = 0;    //Current state of the toggle
+    private int toggleIndex;    //Current state of the toggle
     private boolean previouslyPressed = false; //Was the input device (whatever is passed to input) true last time?
     private final double[] toggleValues; //creates the array of values to toggle through
 
@@ -14,8 +14,13 @@ public class ToggleDouble {
      *
      * @param toggleValues the array of values to toggle through
      */
-    public ToggleDouble(double[] toggleValues) {    //Pass this an array of the values you want the toggle to cycle between. It will start at element 0, work its way through sequentially, then go back to element 0.
+    public ToggleDouble(double[] toggleValues) {
+        this(toggleValues, 0);
+    }
+
+    public ToggleDouble(double[] toggleValues, int startingIndex) {    //Pass this an array of the values you want the toggle to cycle between. It will start at element 0, work its way through sequentially, then go back to element 0.
         this.toggleValues = toggleValues;
+        toggleIndex = startingIndex;
     }
 
     /**
