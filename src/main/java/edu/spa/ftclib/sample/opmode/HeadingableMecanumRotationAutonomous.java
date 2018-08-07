@@ -6,17 +6,17 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import edu.spa.ftclib.internal.controller.ErrorTimeThresholdFinishingAlgorithm;
 import edu.spa.ftclib.internal.controller.FinishableIntegratedController;
 import edu.spa.ftclib.internal.controller.PIDController;
 import edu.spa.ftclib.internal.drivetrain.HeadingableMecanumDrivetrain;
-import edu.spa.ftclib.internal.drivetrain.HeadingableOmniwheelDrivetrain;
 import edu.spa.ftclib.internal.sensor.IntegratingGyroscopeSensor;
 
 /**
  * Created by Michaela on 1/3/2018.
+ * Demonstrates the use of a HeadingableMecanumDrivetrain to autonomously rotate a robot to specific headings and hold those headings.
+ * Tested and found fully functional by Gabriel on 2018-8-4.
  */
 
 @Autonomous
@@ -65,7 +65,7 @@ public class HeadingableMecanumRotationAutonomous extends LinearOpMode {
 
         controller = new FinishableIntegratedController(new IntegratingGyroscopeSensor(imu), pid, new ErrorTimeThresholdFinishingAlgorithm(Math.PI/50, 1));
         drivetrain = new HeadingableMecanumDrivetrain(new DcMotor[]{frontLeft,frontRight, backLeft, backRight}, controller);
-        for (DcMotor motor : drivetrain.motors) motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        for (DcMotor motor : drivetrain.motors) motor.setDirection(DcMotor.Direction.REVERSE);  //Depending on the design of the robot, you may need to comment this line out.
         for (DcMotor motor : drivetrain.motors) motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();

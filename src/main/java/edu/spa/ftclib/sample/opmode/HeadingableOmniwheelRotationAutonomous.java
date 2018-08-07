@@ -15,15 +15,15 @@ import edu.spa.ftclib.internal.sensor.IntegratingGyroscopeSensor;
 
 /**
  * Created by Michaela on 1/3/2018.
+ * Tested and found fully functional by Gabriel on 2018-8-6.
  */
 
 @Autonomous
-
 public class HeadingableOmniwheelRotationAutonomous extends LinearOpMode {
-    public DcMotor frontLeft;
-    public DcMotor frontRight;
-    public DcMotor backLeft;
-    public DcMotor backRight;
+    public DcMotor drive1;
+    public DcMotor drive2;
+    public DcMotor drive3;
+    public DcMotor drive4;
 
     public HeadingableOmniwheelDrivetrain drivetrain;
 
@@ -41,10 +41,10 @@ public class HeadingableOmniwheelRotationAutonomous extends LinearOpMode {
      */
     @Override
     public void runOpMode() throws InterruptedException {   //Notice that this is almost the exact same code as in HeadingableOmniwheelRotationAutonomous.
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        drive1 = hardwareMap.get(DcMotor.class, "drive1");
+        drive2 = hardwareMap.get(DcMotor.class, "drive2");
+        drive3 = hardwareMap.get(DcMotor.class, "drive3");
+        drive4 = hardwareMap.get(DcMotor.class, "drive4");
 
         imu = hardwareMap.get(BNO055IMUImpl.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -57,8 +57,12 @@ public class HeadingableOmniwheelRotationAutonomous extends LinearOpMode {
         imu.initialize(parameters);
         while (!imu.isGyroCalibrated());
 
-        controller = new FinishableIntegratedController(new IntegratingGyroscopeSensor(imu), new PIDController(1,1,1), new ErrorTimeThresholdFinishingAlgorithm(Math.PI/50, 1));
-        drivetrain = new HeadingableOmniwheelDrivetrain(new DcMotor[]{frontLeft,frontRight, backLeft, backRight}, true, controller);
+        PIDController pid = new PIDController(1.5, 0.05, 0);
+        pid.setMaxErrorForIntegral(0.002);
+
+        controller = new FinishableIntegratedController(new IntegratingGyroscopeSensor(imu), pid, new ErrorTimeThresholdFinishingAlgorithm(Math.PI/50, 1));
+        drivetrain = new HeadingableOmniwheelDrivetrain(new DcMotor[]{drive1, drive2, drive3, drive4}, controller);
+        for (DcMotor motor : drivetrain.motors) motor.setDirection(DcMotor.Direction.REVERSE);  //Depending on the design of the robot, you may need to comment this line out.
 
         waitForStart();
 

@@ -13,9 +13,11 @@ import edu.spa.ftclib.internal.state.ToggleInt;
 /**
  * Created by Michaela on 1/7/2018.
  * Demonstrates for the various toggle codes can be used to control the robot.
+ * If you're using the drive wheels, best to run this one when those wheels aren't touching the ground.
+ * Tested and found fully functional by Gabriel on 2018-8-5.
  */
 @TeleOp(name = "Toggle", group = "sample")
-@Disabled
+//@Disabled
 
 public class ToggleTeleop extends OpMode {
     private Servo servo;

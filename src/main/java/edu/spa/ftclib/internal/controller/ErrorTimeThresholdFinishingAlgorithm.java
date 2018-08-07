@@ -28,7 +28,7 @@ public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
     /**
      * Sets the algorithm being used to be the algorithm specified by the user, with a custom heading tolerance and heading duration.
      * @param errorTolerance The custom errorTolerance, how close the robot has to get
-     * @param timeThreshold The custom timeThreshold, how long the robot has to stay within the tolerance
+     * @param timeThreshold The custom timeThreshold, how long (in seconds) the robot has to stay within the tolerance
      */
 
     public ErrorTimeThresholdFinishingAlgorithm(double errorTolerance, double timeThreshold) {

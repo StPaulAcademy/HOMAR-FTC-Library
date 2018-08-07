@@ -40,8 +40,14 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
      * @param controller Which controller you want the system to use.
      *                   @see edu.spa.ftclib.internal.controller.PIDController
      */
-    public HeadingableOmniwheelDrivetrain(DcMotor[] motors, boolean diagonal, FinishableIntegratedController controller) {
-        super(motors, diagonal);
+
+    public HeadingableOmniwheelDrivetrain(DcMotor[] motors, FinishableIntegratedController controller) {
+        super(motors);
+        this.controller = controller;
+    }
+
+    public HeadingableOmniwheelDrivetrain(DcMotor[] motors, double wheelAngle, FinishableIntegratedController controller) {
+        super(motors, wheelAngle);
         this.controller = controller;
     }
 
@@ -53,6 +59,7 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
     @Override
     public void setTargetHeading(double targetHeading) {
         this.targetHeading = targetHeading;
+        controller.setTarget(targetHeading);
     }
 
     /**

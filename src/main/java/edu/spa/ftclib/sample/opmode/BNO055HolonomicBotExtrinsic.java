@@ -9,7 +9,8 @@ import edu.spa.ftclib.sample.robot.BNO055HolonomicBot;
 
 /**
  * Created by Gabriel on 2018-05-21.
- * Simple demo of extrinsic course control
+ * A simple demo of extrinsic course control.
+ * Tested and found fully functional by Gabriel on 2018-8-4.
  */
 
 @TeleOp

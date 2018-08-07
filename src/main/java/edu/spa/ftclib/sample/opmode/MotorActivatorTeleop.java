@@ -9,11 +9,12 @@ import edu.spa.ftclib.internal.activator.MotorActivator;
 
 /**
  * Created by Michaela on 1/7/2018.
- * An example of using the MotorActivator, which can be used for DcMotors or CRServos. This runs a CR Servo forward when activated and not at all when deactivated.
+ * An example of using the MotorActivator, which can be used for DcMotors or (perhaps more usefully) CRServos. This runs a CR Servo forward when activated and not at all when deactivated.
+ * Note the similarity to ServoActivatorTeleop.
+ * Tested and found fully functional by Gabriel on 2018-8-5.
  */
-@TeleOp(name = "Motor Activator", group = "sample")
-@Disabled
 
+@TeleOp(name = "Motor Activator", group = "sample")
 public class MotorActivatorTeleop extends OpMode {
     private CRServo servo;
     private MotorActivator motorActivator;
@@ -24,7 +25,7 @@ public class MotorActivatorTeleop extends OpMode {
      */
     @Override
     public void init() {
-        servo = hardwareMap.get(CRServo.class, "servo");
+        servo = hardwareMap.get(CRServo.class, "CRServo");
         motorActivator = new MotorActivator(servo, 1);
     }
 

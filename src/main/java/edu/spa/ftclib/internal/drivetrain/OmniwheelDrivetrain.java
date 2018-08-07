@@ -12,11 +12,12 @@ public class OmniwheelDrivetrain extends HolonomicFourWheelDrivetrain {
     /**
      * @param motors the array of motors that you give the constructor so that it can find the hardware
      */
-    public OmniwheelDrivetrain(DcMotor[] motors, boolean diagonal) {    //TODO: instead of diagonal/not, take a number for wheel angle (default can be diagonal)
-        super(motors, diagonal ? new double[]{
-                Math.PI / 4, -Math.PI / 4, 3 * Math.PI / 4, -3 * Math.PI / 4 //the wheel angles on an omniwheel drivetrain
-        } : new double[]{
-                0, -Math.PI/2, -Math.PI, Math.PI/2 //the wheel angles on an omniwheel drivetrain
+    public OmniwheelDrivetrain(DcMotor[] motors) {  //This constructor assumes your wheels are mounted diagonally. If they are instead mounted parallel and perpendicular to what you want to define as "forwards," you can use the other constructor with a wheelAngle of Math.PI.
+        this(motors, 3*Math.PI/4);
+    }
+    public OmniwheelDrivetrain(DcMotor[] motors, double wheelAngle) {   //wheelAngle is the angle of the first wheel. The wheels should be in counterclockwise order starting with the wheel immediately counterclockwise of the "front" of your robot (if there is a wheel mounted right at the front of your robot, it should be last).
+        super(motors, new double[]{
+                wheelAngle, wheelAngle + Math.PI / 2, wheelAngle + Math.PI, wheelAngle + 3 * Math.PI / 2
         });
     }
 

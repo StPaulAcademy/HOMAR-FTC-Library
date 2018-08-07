@@ -1,14 +1,19 @@
 package edu.spa.ftclib.sample.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import edu.spa.ftclib.internal.activator.ServoActivator;
 
 /**
  * Created by Michaela on 1/5/2018.
+ * An example of the ServoActivator, which can be used to streamline the common case of only ever setting a servo to two positions ("activated" and "deactivated").
+ * Note the similarity to MotorActivatorTeleop.
+ * Tested and found fully functional by Gabriel on 2018-8-5.
  */
 
+@TeleOp
 public class ServoActivatorTeleop extends OpMode {
     public Servo servo;
     public ServoActivator servoActivator;
