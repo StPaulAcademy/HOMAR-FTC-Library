@@ -29,3 +29,12 @@ dependencies {
     implementation(name: 'RobotCore-release', ext: 'aar')
     implementation(name: 'Hardware-release', ext: 'aar')
 }
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    destinationDir = file("doc/javadoc")
+    failOnError false
+    options.overview = "src/main/overview.html"
+    inputs.file options.overview    //Add the overview file as an input so Javadoc is re-run if the overview file changes
+}
