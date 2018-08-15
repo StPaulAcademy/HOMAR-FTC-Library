@@ -1,6 +1,7 @@
 # HOMAR-FTC-Library
+Quick links: [HOMAR website](TBD); [Javadoc reference](TBD); [Spartan Robotics website](https://sites.google.com/spa.edu/spartan-robotics/). Keep reading for a description and installation instructions.
 ## Welcome!
-This is the home of HOMAR (Holonomic Omniwheel and Mecanum, Autonomy, and Response), a third-party library that simplifies many of the programming tasks in the [*FIRST* Tech Challenge](https://www.firstinspires.org/robotics/ftc). HOMAR was created by Gabriel Konar-Steenberg and Michaela Polley, working on [St. Paul Academy and Summit School](https://www.spa.edu) FTC teams #11117 and #12660.
+This is the home of HOMAR (Holonomic Omniwheel and Mecanum, Autonomy, and Response), a third-party library that simplifies many of the programming tasks in the [*FIRST* Tech Challenge](https://www.firstinspires.org/robotics/ftc). HOMAR was created by Gabriel Konar-Steenberg and Michaela Polley, working on [St. Paul Academy and Summit School](https://www.spa.edu) FTC teams #11117 and #12660 Spartan Robotics.
 ## Creation story
 **In the beginning, there was only chaos…**  
 After our first season, we realized there were a lot of repetitive programming tasks that could be coded once and for all so we didn't have to messily keep rewriting them. This included things like servos that only ever moved to two positions, buttons and toggles for tele-op, and the somewhat involved mathematical algorithms behind the PID controller and holonomic (omniwheel and Mecanum) drivetrains. We decided to create a library to do all of that in a nicely-organized, object-oriented, modular, and extensible way, recognizing that we would need to add more bits and pieces to the library as time went on. In the spirit of gracious professionalism and in the belief that we do our best work when working together, we decided to publish our code so other teams could use it and improve it.
@@ -35,3 +36,16 @@ Here is a list of all the things HOMAR can do:
     * A robot class to be used as a base to extend and add drivetrains, etc.
     * A way to disable the @Disabled annotation for testing
 * Samples! Sometimes the best documentation is an example in code, so we've included dozens of samples demonstrating how to use our library
+
+If this sounds useful to your team, go ahead and install it! Keep in mind that this library is a work-in-progress. The core features are fairly well-developed (i.e. they work), but we plan to add more samples, improve the Javadoc reference, write more tutorials, and add even more features.
+## Installation
+### Using Git
+**If you're already using [Git](https://en.wikipedia.org/wiki/Git) to manage your code, we recommend this method, as it will make it easy to install updates to the library (which we plan to publish frequently).**
+
+To be written.
+### Not using Git
+**If you aren't using Git (or if you don't know what Git is), you should use this method.**
+
+Also to be written.
+##Reference
+You can find our Javadoc reference at [TBD]. The reference is, perhaps more than the rest of the library, a work-in-progress, so check back if you don't see what you need. Also try looking at our code samples, included with the library, which should demonstrate how to use most (if not all) its features. Finally, Spartan Robotics has a website at https://sites.google.com/spa.edu/spartan-robotics/ where you can find more general FTC tutorials and more information about our robotics teams.
