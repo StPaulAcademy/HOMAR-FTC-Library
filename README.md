@@ -1,5 +1,5 @@
 # HOMAR-FTC-Library
-Quick links: [HOMAR website](TBD); [Javadoc reference](TBD); [Spartan Robotics website](https://sites.google.com/spa.edu/spartan-robotics/). Keep reading for a description and installation instructions.
+Quick links: [HOMAR website](https://stpaulacademy.github.io/HOMAR-FTC-Library/); [Javadoc reference](https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/); [Spartan Robotics website](https://sites.google.com/spa.edu/spartan-robotics/). Keep reading for a description and installation instructions.
 ## Welcome!
 This is the home of HOMAR (Holonomic Omniwheel and Mecanum, Autonomy, and Response), a third-party library that simplifies many of the programming tasks in the [*FIRST* Tech Challenge](https://www.firstinspires.org/robotics/ftc). HOMAR was created by Gabriel Konar-Steenberg and Michaela Polley, working on [St. Paul Academy and Summit School](https://www.spa.edu) FTC teams #11117 and #12660 Spartan Robotics.
 ## Creation story
@@ -48,4 +48,4 @@ To be written.
 
 Also to be written.
 ##Reference
-You can find our Javadoc reference at [TBD]. The reference is, perhaps more than the rest of the library, a work-in-progress, so check back if you don't see what you need. Also try looking at our code samples, included with the library, which should demonstrate how to use most (if not all) its features. Finally, Spartan Robotics has a website at https://sites.google.com/spa.edu/spartan-robotics/ where you can find more general FTC tutorials and more information about our robotics teams.
+You can find our Javadoc reference at https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/. The reference is, perhaps more than the rest of the library, a work-in-progress, so check back if you don't see what you need. Also try looking at our code samples, included with the library, which should demonstrate how to use most (if not all) its features. Finally, Spartan Robotics has a website at https://sites.google.com/spa.edu/spartan-robotics/ where you can find more general FTC tutorials and more information about our robotics teams.
