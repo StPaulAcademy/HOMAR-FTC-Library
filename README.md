@@ -47,6 +47,5 @@ To be written.
 **If you aren't using Git (or if you don't know what Git is), you should use this method.**
 
 Also to be written.
-
-##Reference
+## Reference
 You can find our Javadoc reference at https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/. The reference is, perhaps more than the rest of the library, a work-in-progress, so check back if you don't see what you need. Also try looking at our code samples, included with the library, which should demonstrate how to use most (if not all) its features. Finally, Spartan Robotics has a website at https://sites.google.com/spa.edu/spartan-robotics/ where you can find more general FTC tutorials and more information about our robotics teams.
