@@ -30,7 +30,7 @@ dependencies {
     implementation(name: 'Hardware-release', ext: 'aar')
 }
 
-task javadoc(type: Javadoc) {
+task HOMARJavadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     destinationDir = file("doc/javadoc")
