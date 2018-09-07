@@ -45,7 +45,7 @@ If this sounds useful to your team, go ahead and install it! Keep in mind that t
 
 #### Part A: Once Per Repository
 To install HOMAR in your team's repository, follow these steps:
-2. Go to the command line and `cd` to your project folder
+1. Go to the command line and `cd` to your project folder
 3. Test by running `git status`; you should see some information about your Git setup
 4. Run `git submodule init`
 5. Run `git submodule add https://github.com/StPaulAcademy/HOMAR-FTC-Library HOMAR-FTC-Library`
