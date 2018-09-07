@@ -34,6 +34,8 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
      */
     private boolean extrinsic;
 
+    private double course;
+
     /**
      * The constructor for the drivetrain.
      * @param motors The array of motors that you give the constructor so that it can find the hardware
@@ -93,14 +95,23 @@ public class HeadingableOmniwheelDrivetrain extends OmniwheelDrivetrain implemen
 
     @Override
     public void rotate() {
-        while (isRotating()) updateHeading();
+        while (isRotating()) {
+            updateHeading();
+            updateCourse();
+        }
         finishRotating();
     }
 
     @Override
     public void setCourse(double course) {
+        this.course = course;
         if (extrinsic) super.setCourse(course-getCurrentHeading());
         else super.setCourse(course);
+    }
+
+    @Override
+    public void updateCourse() {
+        if (extrinsic) super.setCourse(course-getCurrentHeading());
     }
 
     /**

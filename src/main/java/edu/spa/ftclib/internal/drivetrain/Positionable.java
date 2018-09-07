@@ -39,4 +39,12 @@ public interface Positionable {
      * If there are any settings (motor {@link com.qualcomm.robotcore.hardware.DcMotor.RunMode RunModes}, etc.) you changed to position, change them back in this method.
      */
     void finishPositioning();
+
+    void position();
+
+    /**
+     * All (digital) positioning systems have a minimum unit of position (e.g. an encoder tick); this is what the position should be measured in. (The reason it is a double instead of an int is to eliminate unnecessary rounding error in special cases like omniwheels, where moving x ticks in a certain direction often has the motors actually spinning a different number of ticks.) Many positioning systems also have another natural unit of measurement (e.g. one rotation for an encoder); this method should return the number of ticks in this unit. If there is no natural unit besides the tick (e.g. for ultrasonic sensors), a standard unit such as a centimeter may be used.
+     * @return the number of indivisible ticks per natural/standard unit of distance
+     */
+    double getTicksPerUnit();
 }

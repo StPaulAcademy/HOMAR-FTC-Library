@@ -52,6 +52,7 @@ public class HeadingableTankDrivetrain extends TankDrivetrain implements Heading
     @Override
     public void setTargetHeading(double targetHeading) {
         this.targetHeading = targetHeading;
+        controller.setTarget(targetHeading);
     }
 
     /**
