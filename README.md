@@ -1,5 +1,5 @@
 # HOMAR-FTC-Library
-![HOMAR LOGO](doc/HOMAR_Logo.png)
+![HOMAR Logo](doc/HOMAR_Logo.png) <style>img[alt="HOMAR Logo"] {width=50%}</style>
 Quick links: [HOMAR website](https://stpaulacademy.github.io/HOMAR-FTC-Library/); [Javadoc reference](https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/); [GitHub Page](https://github.com/StPaulAcademy/HOMAR-FTC-Library); [Spartan Robotics website](https://sites.google.com/spa.edu/spartan-robotics/). Keep reading for a description and installation instructions.
 ## Welcome!
 This is the home of HOMAR (Holonomic Omniwheel and Mecanum, Autonomy, and Response), a third-party library that simplifies many of the programming tasks in the [*FIRST* Tech Challenge](https://www.firstinspires.org/robotics/ftc). HOMAR was created by Gabriel Konar-Steenberg and Michaela Polley, working on [St. Paul Academy and Summit School](https://www.spa.edu) FTC teams #11117 and #12660 Spartan Robotics.
@@ -99,7 +99,3 @@ The official Javadoc reference is, perhaps more than the rest of the library, a 
 You can find the Javadoc reference for the most recent version of the library at https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/. If you have installed the library, you can find the reference for your version in the `/doc/javadoc` folder within the library folder you downloaded.
 
 The files in the `/doc` folder aren't meant to be edited directly. If you have made changes to the Javadoc comments within the library code and would like these to be reflected in the HTML Javadoc reference, you can use Android Studio's built-in terminal to run the command `./gradlew HOMARJavadoc` (Mac/Linux) or `gradlew HOMARJavadoc` (Windows). (On Mac/Linux, you may have to first give yourself execute permissions with the command `chmod +x gradlew`.)
-
-
-## Reference
-You can find our Javadoc reference at https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/. The reference is, perhaps more than the rest of the library, a work-in-progress, so check back if you don't see what you need. Also try looking at our code samples, included with the library, which should demonstrate how to use most (if not all) its features. Finally, Spartan Robotics has a website at https://sites.google.com/spa.edu/spartan-robotics/ where you can find more general FTC tutorials and more information about our robotics teams.
