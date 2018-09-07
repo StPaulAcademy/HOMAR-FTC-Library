@@ -12,8 +12,8 @@ import edu.spa.ftclib.util.PIDTuner;
  * Created by Gabriel on 2018-01-07.
  */
 
-@TeleOp(name = "BNO055 Holonomic Bot PID Tuner", group = "sample")
 @Disabled
+@TeleOp(name = "BNO055 Holonomic Bot PID Tuner", group = "sample")
 
 public class BNO055HolonomicBotPIDTuner extends OpMode {
     private PIDTuner tuner;

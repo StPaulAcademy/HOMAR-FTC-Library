@@ -1,5 +1,6 @@
 package edu.spa.ftclib.sample.opmode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -10,6 +11,7 @@ import edu.spa.ftclib.internal.drivetrain.MecanumDrivetrain;
  * Created by Michaela on 1/3/2018.
  */
 
+@Disabled
 @TeleOp(name = "Mecanum Robot Tele-op", group = "sample")
 
 public class MecanumRobotTeleop extends OpMode {

@@ -16,8 +16,9 @@ import edu.spa.ftclib.internal.state.ToggleInt;
  * If you're using the drive wheels, best to run this one when those wheels aren't touching the ground.
  * Tested and found fully functional by Gabriel on 2018-8-5.
  */
-@TeleOp(name = "Toggle", group = "sample")
-//@Disabled
+
+@Disabled
+@TeleOp(name = "Toggle Tele-op", group = "sample")
 
 public class ToggleTeleop extends OpMode {
     private Servo servo;
@@ -61,7 +62,7 @@ public class ToggleTeleop extends OpMode {
         toggleInt.input(gamepad1.b);
         toggleDouble.input(gamepad1.x);
 
-        if (toggleBoolean.output()) {
+        if (toggleBoolean.output()) {   //Possibly change to an LED (or use a MotorActivator)
             motor.setPower(1);
         } else {
             motor.setPower(0);

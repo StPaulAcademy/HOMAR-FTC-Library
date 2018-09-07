@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -19,7 +20,8 @@ import edu.spa.ftclib.internal.sensor.IntegratingGyroscopeSensor;
  * Tested and found fully functional by Gabriel on 2018-8-4.
  */
 
-@Autonomous
+@Disabled
+@Autonomous(name = "Headingable Mecanum Rotation Autonomous", group = "sample")
 
 public class HeadingableMecanumRotationAutonomous extends LinearOpMode {
     public DcMotor frontLeft;

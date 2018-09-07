@@ -21,7 +21,7 @@ import edu.spa.ftclib.internal.sensor.IntegratingGyroscopeSensor;
  * Tested and found fully functional by Gabriel on 2018-8-4.
  */
 
-//@Disabled
+@Disabled
 @Autonomous(name = "Headingable Tank Rotation Autonomous", group = "sample")
 
 public class HeadingableTankRotationAutonomous extends LinearOpMode {

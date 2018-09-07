@@ -29,7 +29,7 @@ import edu.spa.ftclib.internal.state.ToggleBoolean;
  *     </li>
  */
 
-//@Disabled
+@Disabled
 @TeleOp (name = "Tank Teleop", group = "sample")
 
 public class TankTeleop extends OpMode {

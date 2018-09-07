@@ -1,5 +1,6 @@
 package edu.spa.ftclib.sample.opmode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -13,7 +14,9 @@ import edu.spa.ftclib.sample.robot.BNO055HolonomicBot;
  * Tested and found fully functional by Gabriel on 2018-8-4.
  */
 
-@TeleOp
+@Disabled
+@TeleOp(name = "BNO055 Holonomic Bot Extrinsic", group = "sample")
+
 public class BNO055HolonomicBotExtrinsic extends OpMode {
     private static final double HEADING_COEFF = 0.005;  //Radians per millisecond
     private BNO055HolonomicBot robot;

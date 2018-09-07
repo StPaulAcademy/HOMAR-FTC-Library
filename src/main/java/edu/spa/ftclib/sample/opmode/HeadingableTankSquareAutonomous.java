@@ -19,7 +19,7 @@ import edu.spa.ftclib.internal.sensor.IntegratingGyroscopeSensor;
  * UNTESTED.
  */
 
-//@Disabled
+@Disabled
 @Autonomous (name = "Headingable Tank Square Autonomous", group = "sample")
 
 public class HeadingableTankSquareAutonomous extends LinearOpMode {

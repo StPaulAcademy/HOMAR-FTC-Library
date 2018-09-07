@@ -14,7 +14,9 @@ import edu.spa.ftclib.internal.activator.MotorActivator;
  * Tested and found fully functional by Gabriel on 2018-8-5.
  */
 
+@Disabled
 @TeleOp(name = "Motor Activator", group = "sample")
+
 public class MotorActivatorTeleop extends OpMode {
     private CRServo servo;
     private MotorActivator motorActivator;

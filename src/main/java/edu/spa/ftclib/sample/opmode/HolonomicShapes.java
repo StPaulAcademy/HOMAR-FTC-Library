@@ -31,7 +31,7 @@ import edu.spa.ftclib.internal.sensor.IntegratingGyroscopeSensor;
  * Controls: X for an omniwheel robot with no IMU, Y for a Mecanum robot with no IMU, A for an omniwheel robot with an IMU, B for a Mecanum robot with an imu
  */
 
-//@Disabled
+@Disabled
 @TeleOp(name = "Holonomic Shapes", group = "sample")
 
 public class HolonomicShapes extends LinearOpMode {

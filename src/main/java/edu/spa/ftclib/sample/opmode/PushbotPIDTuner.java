@@ -1,6 +1,8 @@
 package edu.spa.ftclib.sample.opmode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import edu.spa.ftclib.internal.controller.PIDController;
 import edu.spa.ftclib.sample.robot.HeadingablePushbot;
@@ -9,6 +11,9 @@ import edu.spa.ftclib.util.PIDTuner;
 /**
  * Created by Gabriel on 2018-01-07.
  */
+
+@Disabled
+@TeleOp(name = "Pushbot PID Tuner", group = "sample")
 
 public class PushbotPIDTuner extends OpMode {
     private PIDTuner tuner;

@@ -1,5 +1,6 @@
 package edu.spa.ftclib.sample.opmode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -13,7 +14,9 @@ import edu.spa.ftclib.internal.activator.ServoActivator;
  * Tested and found fully functional by Gabriel on 2018-8-5.
  */
 
-@TeleOp
+@Disabled
+@TeleOp (name = "Servo Activator Tele-op", group = "sample")
+
 public class ServoActivatorTeleop extends OpMode {
     public Servo servo;
     public ServoActivator servoActivator;
