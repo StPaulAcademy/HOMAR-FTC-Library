@@ -85,7 +85,6 @@ To be written.
 ### Not using Git
 **If you aren't using Git (or if you don't know what Git is), you should use this method.**
 
-Ahe official Javadoc reference is, perhaps more than the rest of the library, a work-in-progress, so check back if you don't see what you need. Also try looking at our code samples, included with the library, which should demonstrate how to use most (if not all) its features. Finally, Spartan Robotics has a website at https://sites.google.com/spa.edu/spartan-robotics/ where you can find more general FTC tutorials and more information about our robotics teams.
  1. Go to (https://github.com/StPaulAcademy/HOMAR-FTC-Library), click `Clone or download`, and click `Download ZIP`
  1. Unzip the resulting download. You should have a folder containing `src`, `README.md`, etc.; rename this folder `HOMAR-FTC-Library`
  1. Move the folder you just renamed into your FTC project folder (the one that contains `TeamCode`, `FtcRobotController`, etc.)
@@ -94,6 +93,9 @@ Ahe official Javadoc reference is, perhaps more than the rest of the library, a 
  To update the library, repeat steps 1-3 (step 3 will have you replace the old library folder with the new one, so you should back up this folder if you think you might want to go back to it). Then open your project in Android Studio and choose `File -> Sync with File System`; finally, choose `File -> Sync Project with Gradle Files`. There should be no need to repeat step 4.
 
 ## Documentation
+
+The official Javadoc reference is, perhaps more than the rest of the library, a work-in-progress, so check back if you don't see what you need. Also try looking at our code samples, included with the library, which should demonstrate how to use most (if not all) its features. Finally, Spartan Robotics has a website at https://sites.google.com/spa.edu/spartan-robotics/ where you can find more general FTC tutorials and more information about our robotics teams.
+
 You can find the Javadoc reference for the most recent version of the library at https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/. If you have installed the library, you can find the reference for your version in the `/doc/javadoc` folder within the library folder you downloaded.
 
 The files in the `/doc` folder aren't meant to be edited directly. If you have made changes to the Javadoc comments within the library code and would like these to be reflected in the HTML Javadoc reference, you can use Android Studio's built-in terminal to run the command `./gradlew HOMARJavadoc` (Mac/Linux) or `gradlew HOMARJavadoc` (Windows). (On Mac/Linux, you may have to first give yourself execute permissions with the command `chmod +x gradlew`.)
