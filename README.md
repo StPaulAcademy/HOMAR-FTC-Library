@@ -1,5 +1,5 @@
 # HOMAR-FTC-Library
-<img src="https://github.com/StPaulAcademy/HOMAR-FTC-Library/blob/master/doc/HOMAR_Logo.png?raw=true" alt="HOMAR Logo"></img>
+<img src="https://github.com/StPaulAcademy/HOMAR-FTC-Library/blob/master/doc/HOMAR_Logo.png?raw=true" alt="HOMAR Logo" style="width: 50%"></img>
 Quick links: [HOMAR website](https://stpaulacademy.github.io/HOMAR-FTC-Library/); [Javadoc reference](https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/); [GitHub Page](https://github.com/StPaulAcademy/HOMAR-FTC-Library); [Spartan Robotics website](https://sites.google.com/spa.edu/spartan-robotics/). Keep reading for a description and installation instructions.
 ## Welcome!
 This is the home of HOMAR (Holonomic Omniwheel and Mecanum, Autonomy, and Response), a third-party library that simplifies many of the programming tasks in the [*FIRST* Tech Challenge](https://www.firstinspires.org/robotics/ftc). HOMAR was created by Gabriel Konar-Steenberg and Michaela Polley, working on [St. Paul Academy and Summit School](https://www.spa.edu) FTC teams #11117 and #12660 Spartan Robotics.
