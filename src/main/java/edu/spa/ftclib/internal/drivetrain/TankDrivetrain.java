@@ -16,12 +16,16 @@ public class TankDrivetrain extends Drivetrain implements Rotatable, Positionabl
 
     private double[] wheelTargetPositions = new double[2];
 
+    public DcMotor left, right;
+
     /**
      * The constructor for the class.
      * @param motors the array of motors that you give the constructor so that it can find the hardware
      */
     public TankDrivetrain(DcMotor[] motors) {
         super(motors);
+        left = motors[0];
+        right = motors[1];
     }
 
     public TankDrivetrain(DcMotor motor1, DcMotor motor2) {
@@ -120,5 +124,23 @@ public class TankDrivetrain extends Drivetrain implements Rotatable, Positionabl
     public void finishPositioning() {
         for (DcMotor motor : motors) motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         for (int i = 0; i < motors.length; i++) motors[i].setMode(runModes[i]);
+    }
+
+    @Override
+    public void position() {
+        while (isPositioning()) updatePosition();
+        finishPositioning();
+    }
+
+    /**
+     * Depending on the encoder type, the number of ticks per rotation can vary. This method uses motor configuration data to calculate that number.
+     * @return the number of encoder ticks per rotation
+     */
+    @Override
+    public double getTicksPerUnit() {  //The motors better have the same number of ticks per rotation (perhaps a future version can make this unnecessary), but get the average anyway
+        double ticksPerUnit = 0;
+        for (DcMotor motor : motors) ticksPerUnit += motor.getMotorType().getTicksPerRev();
+        ticksPerUnit /= motors.length;
+        return ticksPerUnit;
     }
 }
