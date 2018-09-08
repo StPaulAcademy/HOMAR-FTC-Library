@@ -1,4 +1,4 @@
-<img src="https://github.com/StPaulAcademy/HOMAR-FTC-Library/blob/master/doc/HOMAR_Logo.png?raw=true" alt="HOMAR Logo" width="333" height="269"></img>
+<img src="https://github.com/StPaulAcademy/HOMAR-FTC-Library/blob/master/doc/HOMAR_Logo.png?raw=true" alt="HOMAR Logo" width="333" height="269">
 # HOMAR-FTC-Library
 Quick links: [HOMAR website](https://stpaulacademy.github.io/HOMAR-FTC-Library/); [Javadoc reference](https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/); [GitHub Page](https://github.com/StPaulAcademy/HOMAR-FTC-Library); [Spartan Robotics website](https://sites.google.com/spa.edu/spartan-robotics/). Keep reading for a description and installation instructions.
 ## Welcome!
