@@ -41,7 +41,7 @@ Here is a list of all the things HOMAR can do:
 If this sounds useful to your team, go ahead and install it! Keep in mind that this library is a work-in-progress. The core features are fairly well-developed (i.e. they work), but we plan to add more samples, improve the Javadoc reference, write more tutorials, and add even more features.
 ## Installation
 ### Using Git
-**If you're already using [Git](https://en.wikipedia.org/wiki/Git) to manage your code, we recommend this method, as it will make it easy to install updates to the library (which we plan to publish frequently).**
+**If you're already using [Git](https://en.wikipedia.org/wiki/Git) to manage your code, we recommend this method, as it will make it easy to install updates to the library (which we plan to publish frequently) and relatively easy for your teammates to use the library once you've installed it.**
 
 #### Part A: Once Per Repository
 To install HOMAR in your team's repository, follow these steps:
@@ -78,12 +78,17 @@ Once you have installed HOMAR in your team’s repository, you’ll need to foll
 1. Test by opening `TestOpMode.java` in `TeamCode/java/org.firstinspires.ftc.teamcode` (or wherever your store your op-modes) and verifying that there are no import errors
 1. Try to commit and try to update — neither should detect any changes
 
-#### Part C: Updating
-To be written. 
+#### Updating
+If you're using Git from the command line, you can update HOMAR by `cd`-ing to the HOMAR-FTC-Library folder and running `git pull`.
+
+If you're using Android Studio's built-in version control tools, the `Update Project` command will automatically update HOMAR as well as your own code. We're not planning to introduce any catastrophic updates; however, we wouldn't want to break some finely-tuned code right before one of your competitions. We're researching the best way to disable this auto-updating; in the meantime, here are a few workarounds so you can update on your schedule, not ours:
+* If you use `VCS -> Git -> Pull…` instead of the `Update Project` command, you can choose to update only your own repository
+* If you want to install an older version of HOMAR temporarily, you can look up the hash of the most recent commit you want (go [here](https://github.com/StPaulAcademy/HOMAR-FTC-Library/commits/master) and click the clipboard icon of the commit you want to copy the hash), then click on `Git: …` at the bottom-right of the Android Studio window, then `HOMAR-FTC-Library`, then `Checkout Tag or Revision…`, then paste in your hash. To go back to the most recent version, follow steps 12-13 under "Part B: Once Per Computer" (above) and then update.
+* If neither of those work for you, you can always install the library the old-fashioned way without using Git (see below)
 
 
 ### Not using Git
-**If you aren't using Git (or if you don't know what Git is), you should use this method.**
+**If you aren't using Git, don't know what Git is, or are using Android Studio's version control tools and don't want to deal with avoiding auto-updating, you should use this method.**
 
  1. Go to (https://github.com/StPaulAcademy/HOMAR-FTC-Library), click `Clone or download`, and click `Download ZIP`
  1. Unzip the resulting download. You should have a folder containing `src`, `README.md`, etc.; rename this folder `HOMAR-FTC-Library`
