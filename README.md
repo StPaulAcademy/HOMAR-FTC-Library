@@ -52,7 +52,7 @@ To install HOMAR in your team's repository, follow these steps:
 6. Open your project in Android Studio and choose `File -> Sync with File System`
 7. Choose `File -> Sync Project with Gradle Files`
 8. Click “Add root” in the box that appears about an “unregistered VCS root”
-9. Open `settings.gradle` and add this line: `include ‘HOMAR-FTC-Library`
+9. Open `settings.gradle` and add this line: `include 'HOMAR-FTC-Library'`
 10. Open the `build.release.gradle` file under `TeamCode` (or wherever you will be writing your code) and add this line: `implementation project(':HOMAR-FTC-Library')`
 11. Repeat step 9 for the `build.release.gradle` file under `FtcRobotController`
 12. Repeat step 6
