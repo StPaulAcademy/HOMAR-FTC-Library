@@ -46,19 +46,19 @@ If this sounds useful to your team, go ahead and install it! Keep in mind that t
 #### Part A: Once Per Repository
 To install HOMAR in your team's repository, follow these steps:
 1. Go to the command line and `cd` to your project folder
-3. Test by running `git status`; you should see some information about your Git setup
-4. Run `git submodule init`
-5. Run `git submodule add https://github.com/StPaulAcademy/HOMAR-FTC-Library HOMAR-FTC-Library`
-6. Open your project in Android Studio and choose `File -> Sync with File System`
-7. Choose `File -> Sync Project with Gradle Files`
-8. Click “Add root” in the box that appears about an “unregistered VCS root”
-9. Open `settings.gradle` and add this line: `include 'HOMAR-FTC-Library'`
-10. Open the `build.release.gradle` file under `TeamCode` (or wherever you will be writing your code) and add this line: `implementation project(':HOMAR-FTC-Library')`
-11. Repeat step 9 for the `build.release.gradle` file under `FtcRobotController`
-12. Repeat step 6
-12. To test, go to `HOMAR-FTC-Library/java/edu.spa.ftclib/sample/opmode` and copy `TestOpMode.java` to `TeamCode/java/org.firstinspires.ftc.teamcode` (or wherever your store your op-modes)
-13. Open the copy of `TestOpMode.java` you just made and verify that there are no import errors. As an additional test, you can try running `TestOpMode` on a robot.
-14. Finally, commit and push your changes. You’re done!
+1. Test by running `git status`; you should see some information about your Git setup
+1. Run `git submodule init`
+1. Run `git submodule add https://github.com/StPaulAcademy/HOMAR-FTC-Library HOMAR-FTC-Library`
+1. Open your project in Android Studio and choose `File -> Sync with File System`
+1. Choose `File -> Sync Project with Gradle Files`
+1. Click “Add root” in the box that appears about an “unregistered VCS root”
+1. Open `settings.gradle` and add this line: `include 'HOMAR-FTC-Library'`
+1. Open the `build.release.gradle` file under `TeamCode` (or wherever you will be writing your code) and add this line: `implementation project(':HOMAR-FTC-Library')` within the curly brackets
+1. Repeat step 9 for the `build.release.gradle` file under `FtcRobotController`
+1. Repeat step 6
+1. To test, go to `HOMAR-FTC-Library/java/edu.spa.ftclib/sample/opmode` and copy `TestOpMode.java` to `TeamCode/java/org.firstinspires.ftc.teamcode` (or wherever your store your op-modes)
+1. Open the copy of `TestOpMode.java` you just made and verify that there are no import errors. As an additional test, you can try running `TestOpMode` on a robot.
+1. Finally, commit and push your changes. You’re done!
 
 #### Part B: Once Per Computer
 Once you have installed HOMAR in your team’s repository, you’ll need to follow these steps for every other computer you will be programming on (not counting the one you used in part A):
@@ -93,7 +93,7 @@ If you're using Android Studio's built-in version control tools, the `Update Pro
  1. Go to (https://github.com/StPaulAcademy/HOMAR-FTC-Library), click `Clone or download`, and click `Download ZIP`
  1. Unzip the resulting download. You should have a folder containing `src`, `README.md`, etc.; rename this folder `HOMAR-FTC-Library`
  1. Move the folder you just renamed into your FTC project folder (the one that contains `TeamCode`, `FtcRobotController`, etc.)
- 1. Follow steps 5-13 under “Part A: Once per repository” above
+ 1. Follow steps 5-13 under “Part A: Once per repository” above, skipping step 7
  
  To update the library, repeat steps 1-3 (step 3 will have you replace the old library folder with the new one, so you should back up this folder if you think you might want to go back to it). Then open your project in Android Studio and choose `File -> Sync with File System`; finally, choose `File -> Sync Project with Gradle Files`. There should be no need to repeat step 4.
 
