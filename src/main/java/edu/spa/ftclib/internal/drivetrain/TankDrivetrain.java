@@ -76,8 +76,8 @@ public class TankDrivetrain extends Drivetrain implements Rotatable, Positionabl
         for (DcMotor motor : motors) motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         for (DcMotor motor : motors) motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         for (int i = 0; i < motors.length; i++) {   //Calculate how far each wheel has to go to get the drivetrain to a specific position
-            wheelTargetPositions[0] = targetPosition*(1-rotation);
-            wheelTargetPositions[1] = targetPosition * (1+rotation);
+            wheelTargetPositions[0] = targetPosition*(1-rotation/getVelocity());
+            wheelTargetPositions[1] = targetPosition * (1+rotation/getVelocity());
             motors[i].setTargetPosition((int)(wheelTargetPositions[i]+0.5));    //Round to the nearest int because setTargetPosition only accepts ints
         }
         updateMotorPowers();
