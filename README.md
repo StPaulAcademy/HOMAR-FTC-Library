@@ -104,3 +104,8 @@ The official Javadoc reference is, perhaps more than the rest of the library, a 
 You can find the Javadoc reference for the most recent version of the library at https://stpaulacademy.github.io/HOMAR-FTC-Library/doc/javadoc/. If you have installed the library, you can find the reference for your version in the `/doc/javadoc` folder within the library folder you downloaded.
 
 The files in the `/doc` folder aren't meant to be edited directly. If you have made changes to the Javadoc comments within the library code and would like these to be reflected in the HTML Javadoc reference, you can use Android Studio's built-in terminal to run the command `./gradlew HOMARJavadoc` (Mac/Linux) or `gradlew HOMARJavadoc` (Windows). (On Mac/Linux, you may have to first give yourself execute permissions with the command `chmod +x gradlew`.)
+
+## Changelog
+### develop:
+* *Fixed* non-Git installation instructions and added detail to Git installation instructions
+* *Fixed* TankDrivetrain positioning formula
