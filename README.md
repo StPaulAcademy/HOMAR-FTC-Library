@@ -107,5 +107,8 @@ The files in the `/doc` folder aren't meant to be edited directly. If you have m
 
 ## Changelog
 ### develop:
-* **Fixed** non-Git installation instructions and added detail to Git installation instructions
+* **Fixed** Non-Git installation instructions and added detail to Git installation instructions
 * **Fixed** TankDrivetrain positioning formula
+* **Fixed** Inexplicable line of PIDController.java
+* **Added** Derivative limiting implementation for PID controller
+* **Added** Integral limiting functionality for PID controller

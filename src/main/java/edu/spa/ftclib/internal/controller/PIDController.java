@@ -35,7 +35,7 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     private double target = 0;
 
     /**
-     * The ouput from the integral part of the controller.
+     * The ouptut from the integral part of the controller.
      */
     private double integral = 0;
 
@@ -55,6 +55,8 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     private boolean processManualDerivative = false;
 
     private double maxErrorForIntegral = Double.POSITIVE_INFINITY;
+
+    private double maxIntegral = Double.POSITIVE_INFINITY;
     private double maxDerivative = Double.POSITIVE_INFINITY;
 
     /**
@@ -123,8 +125,14 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     public void input(double input) {
         long newTime = System.nanoTime();
         error = target-input;
-        if (!integralSet) integral += Range.clip(error, -maxErrorForIntegral, maxErrorForIntegral)*nanoToUnit(newTime-timeAtUpdate);
-        if (!derivativeSet) derivative = derivative*derivativeAveraging+(error/nanoToUnit(newTime-timeAtUpdate))*(1-derivativeAveraging);
+        if (!integralSet) {
+            integral += Range.clip(error, -maxErrorForIntegral, maxErrorForIntegral)*nanoToUnit(newTime-timeAtUpdate);
+            integral = Range.clip(integral, -maxIntegral, maxIntegral);
+        }
+        if (!derivativeSet) {
+            derivative = derivative*derivativeAveraging+(error/nanoToUnit(newTime-timeAtUpdate))*(1-derivativeAveraging);
+            derivative = Range.clip(derivative, -maxDerivative, maxDerivative);
+        }
         timeAtUpdate = newTime;
         integralSet = false;
         derivativeSet = false;
@@ -152,8 +160,10 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
     }
 
     public void setDerivative(double derivative) {
-        if (processManualDerivative) derivativeAveraging = Range.clip(derivativeAveraging, -maxErrorForIntegral, maxErrorForIntegral);
-        if (processManualDerivative) this.derivative = this.derivative*derivativeAveraging+derivative*(1-derivativeAveraging);
+        if (processManualDerivative) {
+            this.derivative = this.derivative*derivativeAveraging+derivative*(1-derivativeAveraging);
+            this.derivative = Range.clip(this.derivative, -maxDerivative, maxDerivative);
+        }
         else this.derivative = derivative;
         derivativeSet = true;
     }
@@ -216,5 +226,13 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
 
     public void setMaxDerivative(double maxDerivative) {
         this.maxDerivative = Math.abs(maxDerivative);
+    }
+
+    public double getMaxIntegral() {
+        return maxIntegral;
+    }
+
+    public void setMaxIntegral(double maxIntegral) {
+        this.maxIntegral = Math.abs(maxIntegral);
     }
 }
