@@ -12,15 +12,16 @@ import edu.spa.ftclib.sample.robot.BNO055HolonomicBot;
  * Created by Gabriel on 2018-05-21.
  * A simple demo of extrinsic course control.
  * Tested and found fully functional by Gabriel on 2018-8-4.
+ * Updated for extrinsic offset and successfully re-tested by Gabriel on 2019-1-25
  */
 
-@Disabled
+//@Disabled
 @TeleOp(name = "BNO055 Holonomic Bot Extrinsic", group = "sample")
 
 public class BNO055HolonomicBotExtrinsic extends OpMode {
     private static final double HEADING_COEFF = 0.005;  //Radians per millisecond
     private BNO055HolonomicBot robot;
-    private Button buttonLeft, buttonRight;
+    private Button buttonLeft, buttonRight, buttonY;
     private double desiredHeading = 0;
     private ElapsedTime timer;
     /**
@@ -36,6 +37,7 @@ public class BNO055HolonomicBotExtrinsic extends OpMode {
         timer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         buttonLeft = new Button();
         buttonRight = new Button();
+        buttonY = new Button();
     }
 
     /**
@@ -53,6 +55,8 @@ public class BNO055HolonomicBotExtrinsic extends OpMode {
         buttonRight.input(gamepad1.right_bumper);
         if (buttonLeft.onPress()) desiredHeading += -Math.PI/4;
         if (buttonRight.onPress()) desiredHeading += Math.PI/4;
+        buttonY.input(gamepad1.y);
+        if (buttonY.onPress()) robot.drivetrain.setExtrinsicOffset(desiredHeading);
 
         robot.drivetrain.setCourse(course);
         robot.drivetrain.setVelocity(velocity);
@@ -60,6 +64,7 @@ public class BNO055HolonomicBotExtrinsic extends OpMode {
         robot.drivetrain.updateHeading();
 
         telemetry.addData("Desired heading", desiredHeading);
+        telemetry.addData("Extrinsic offset", robot.drivetrain.getExtrinsicOffset());
         telemetry.update();
     }
 }

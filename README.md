@@ -112,3 +112,4 @@ The files in the `/doc` folder aren't meant to be edited directly. If you have m
 * **Fixed** Inexplicable line of PIDController.java
 * **Added** Derivative limiting implementation for PID controller
 * **Added** Integral limiting functionality for PID controller
+* **Added** Ability to set a heading offset for Extrinsicable drivetrains

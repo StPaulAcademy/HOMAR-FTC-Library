@@ -33,6 +33,7 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
      * Whether the drivetrain is operating extrinsically
      */
     private boolean extrinsic;
+    private double extrinsicOffset;
 
     private double course;
 
@@ -99,13 +100,13 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
     @Override
     public void setCourse(double course) {
         this.course = course;
-        if (extrinsic) super.setCourse(course-getCurrentHeading());
+        if (extrinsic) super.setCourse(course-getCurrentHeading()+extrinsicOffset);
         else super.setCourse(course);
     }
 
     @Override
     public void updateCourse() {
-        if (extrinsic) super.setCourse(course-getCurrentHeading());
+        if (extrinsic) super.setCourse(course-getCurrentHeading()+extrinsicOffset);
     }
 
     @Override
@@ -139,5 +140,15 @@ public class HeadingableMecanumDrivetrain extends MecanumDrivetrain implements H
     @Override
     public boolean getExtrinsic() {
         return extrinsic;
+    }
+
+    @Override
+    public void setExtrinsicOffset(double extrinsicOffset) {
+        this.extrinsicOffset = extrinsicOffset;
+    }
+
+    @Override
+    public double getExtrinsicOffset() {
+        return extrinsicOffset;
     }
 }
