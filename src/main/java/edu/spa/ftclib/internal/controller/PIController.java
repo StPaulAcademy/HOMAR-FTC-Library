@@ -14,4 +14,12 @@ public class PIController extends PIDController {
     public PIController(double KP, double KI) {
         super(KP, KI, 0);
     }
+
+    public PIController(PIController original, boolean copyState) {
+        super(original, copyState);
+    }
+
+    public PIController(PIController original) {
+        this(original, false);
+    }
 }

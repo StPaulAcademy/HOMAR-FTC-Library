@@ -7,6 +7,7 @@ package edu.spa.ftclib.internal.controller;
  */
 
 public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
+
     /**
      *
      */
@@ -36,6 +37,19 @@ public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
         this.timeThreshold = (long)(timeThreshold*1e9); //Convert to nanoseconds
     }
 
+    public ErrorTimeThresholdFinishingAlgorithm(ErrorTimeThresholdFinishingAlgorithm original, boolean copyState) {
+        this(original.getErrorTolerance(), original.getTimeThreshold());
+        if (copyState) {
+            input = original.getInput();
+            lastOutOfRange = original.getLastOutOfRange();
+            withinRange = original.isWithinRange();
+        }
+    }
+
+    public ErrorTimeThresholdFinishingAlgorithm(ErrorTimeThresholdFinishingAlgorithm original) {
+        this(original, false);
+    }
+
     /**
      * Updated the controller algorithm, and if the heading is outside of the tolerance, it sets the lastOutOfRange to the current time.
      */
@@ -60,5 +74,33 @@ public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
             withinRange = false;
         }
         else withinRange = true;
+    }
+
+    public double getErrorTolerance() {
+        return errorTolerance;
+    }
+
+    public void setErrorTolerance(double errorTolerance) {
+        this.errorTolerance = errorTolerance;
+    }
+
+    public long getTimeThreshold() {
+        return timeThreshold;
+    }
+
+    public void setTimeThreshold(long timeThreshold) {
+        this.timeThreshold = timeThreshold;
+    }
+
+    public long getLastOutOfRange() {
+        return lastOutOfRange;
+    }
+
+    public boolean isWithinRange() {
+        return withinRange;
+    }
+
+    public double getInput() {
+        return input;
     }
 }

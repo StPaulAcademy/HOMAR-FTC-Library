@@ -65,12 +65,30 @@ public class PIDController extends ControlAlgorithm implements DerivativeAlgorit
      * @param KI The gain for the integral part of the controller
      * @param KD The gain for the derivative part of the controller
      */
-    public PIDController (final double KP, final double KI, final double KD) {
+    public PIDController(final double KP, final double KI, final double KD) {
         this.KP = KP;
         this.KI = KI;
         this.KD = KD;
         timeAtUpdate = System.nanoTime();
         integral = 0;
+    }
+
+    public PIDController(PIDController original, boolean copyState) {
+        this(original.getKP(), original.getKI(), original.getKD());
+        setDerivativeAveraging(original.getDerivativeAveraging());
+        setMaxDerivative(original.getMaxDerivative());
+        setMaxErrorForIntegral(original.getMaxErrorForIntegral());
+        setMaxIntegral(original.getMaxIntegral());
+        if (copyState) {
+            error = original.getError();
+            setTarget(original.getTarget());
+            setIntegral(original.getIntegral());
+            setDerivative(original.getDerivative());
+        }
+    }
+
+    public PIDController(PIDController original) {
+        this(original, false);
     }
 
     /**

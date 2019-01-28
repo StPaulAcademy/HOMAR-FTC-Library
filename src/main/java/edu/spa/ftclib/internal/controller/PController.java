@@ -13,4 +13,12 @@ public class PController extends PIDController {
     public PController(double KP) {
         super(KP, 0, 0);
     }
+
+    public PController(PController original, boolean copyState) {
+        super(original, copyState);
+    }
+
+    public PController(PController original) {
+        this(original, false);
+    }
 }
