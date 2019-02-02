@@ -2,14 +2,17 @@ package edu.spa.ftclib.internal.controller;
 
 //import edu.spa.ftclib.internal.Global;    //For testing
 
+//Created by Gabriel on 2017-12-29.
+
 /**
- * Created by Gabriel on 2017-12-29.
+ * Uses error tolerance and time threshold to determine when to stop running the controller and count it as "finished."
+ * The robot must stay within the error tolerance continuously for the time given in the time threshold to finish.
  */
 
 public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
 
     /**
-     *
+     * The difference between the target value and the current value you are willing to live with
      */
     private double errorTolerance;
 
@@ -37,6 +40,11 @@ public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
         this.timeThreshold = (long)(timeThreshold*1e9); //Convert to nanoseconds
     }
 
+    /**
+     * It makes another algorithm by copying the original one
+     * @param original The algorithm you wish to copy from
+     * @param copyState Whether you want the various states to be copied as well. FALSE for only copying the settings, TRUE for also copying the current status of the controller
+     */
     public ErrorTimeThresholdFinishingAlgorithm(ErrorTimeThresholdFinishingAlgorithm original, boolean copyState) {
         this(original.getErrorTolerance(), original.getTimeThreshold());
         if (copyState) {
@@ -46,14 +54,19 @@ public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
         }
     }
 
+    /**
+     * Makes a copy of the algorithm, but only copies the settings
+     * @param original The algorithm you wish to copy
+     */
     public ErrorTimeThresholdFinishingAlgorithm(ErrorTimeThresholdFinishingAlgorithm original) {
         this(original, false);
     }
 
-    /**
-     * Updated the controller algorithm, and if the heading is outside of the tolerance, it sets the lastOutOfRange to the current time.
-     */
 
+    /**
+     * Determines that the controller is finished
+     * @return If the algorithm is finished or not
+     */
     @Override
     public boolean finished() {
         /*Global.telemetry.addData("finishing", System.nanoTime()-lastOutOfRange);  //For testing
@@ -62,6 +75,10 @@ public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
         return ((System.nanoTime()-lastOutOfRange) > timeThreshold) && withinRange;
     }
 
+    /**
+     * Updated the controller algorithm, and if the heading is outside of the tolerance, it sets the lastOutOfRange to the current time.
+     * @param input The current value of the sensor
+     */
     @Override
     public void input(double input) {
         this.input = input;
@@ -76,30 +93,58 @@ public class ErrorTimeThresholdFinishingAlgorithm extends FinishingAlgorithm {
         else withinRange = true;
     }
 
+    /**
+     * Returns the error tolerance
+     * @return The current error tolerance
+     */
     public double getErrorTolerance() {
         return errorTolerance;
     }
 
+    /**
+     * Set the error tolerance
+     * @param errorTolerance Difference between target value and actual value that you are willing to live with
+     */
     public void setErrorTolerance(double errorTolerance) {
         this.errorTolerance = errorTolerance;
     }
 
+    /**
+     * Returns the time threshold
+     * @return The current time threshold
+     */
     public long getTimeThreshold() {
         return timeThreshold;
     }
 
+    /**
+     * Sets the time threshold
+     * @param timeThreshold The amount of time the robot must stay within the error tolerance to be considered finished
+     */
     public void setTimeThreshold(long timeThreshold) {
         this.timeThreshold = timeThreshold;
     }
 
+    /**
+     * Returns the last time the robot was outside of the error tolerance
+     * @return The last time the robot was outside of the error tolerance
+     */
     public long getLastOutOfRange() {
         return lastOutOfRange;
     }
 
+    /**
+     * Returns whether of not the robot is currently within the error threshold
+     * @return Whether or not the robot is currently within the error threshold
+     */
     public boolean isWithinRange() {
         return withinRange;
     }
 
+    /**
+     * Returns the current sensor value
+     * @return The current sensor value
+     */
     public double getInput() {
         return input;
     }

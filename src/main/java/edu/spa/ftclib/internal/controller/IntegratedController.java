@@ -3,15 +3,31 @@ package edu.spa.ftclib.internal.controller;
 import edu.spa.ftclib.internal.sensor.DerivativeSensor;
 import edu.spa.ftclib.internal.sensor.Sensor;
 
+//Created by Gabriel on 2018-01-02.
+
 /**
- * Created by Gabriel on 2018-01-02.
+ *
  */
 
 public class IntegratedController implements Controller, Targetable {
+    /**
+     * The sensor providing the values for the robot
+     */
     public Sensor sensor;
+    /**
+     * The algorithm doing the math to control the robot
+     */
     public ControlAlgorithm algorithm;
+    /**
+     * The value the robot is trying to reach
+     */
     private double target;
 
+    /**
+     * Sets up the controller
+     * @param sensor The sensor providing the values from the robot
+     * @param algorithm The algorithm being used to do the math
+     */
     public IntegratedController(Sensor sensor, ControlAlgorithm algorithm) {
         this.sensor = sensor;
         this.algorithm = algorithm;
