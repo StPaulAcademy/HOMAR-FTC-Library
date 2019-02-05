@@ -27,6 +27,7 @@ import edu.spa.ftclib.internal.state.ToggleBoolean;
  *             <li>Right stick Y: right drive motor</li>
  *         </ul>
  *     </li>
+ * </ul>
  */
 
 @Disabled
