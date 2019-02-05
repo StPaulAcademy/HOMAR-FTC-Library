@@ -19,6 +19,7 @@ import edu.spa.ftclib.internal.sensor.IntegratingGyroscopeSensor;
  * UNTESTED.
  * Demonstrates the use of a HeadingableMecanumDrivetrain to autonomously rotate a robot to specific headings and hold those headings.
  * Tested and found fully functional by Gabriel on 2018-8-4.
+ * Retested for new settings on a more realistic tank drivetrain and found functional by Gabriel on 2019-2-4 (except encoders not used)
  */
 
 @Disabled
@@ -61,7 +62,8 @@ public class HeadingableTankRotationAutonomous extends LinearOpMode {
 
 
         PIDController pid = new PIDController(1.5, 0.05, 0);
-        pid.setMaxErrorForIntegral(0.002);
+        pid.setMaxErrorForIntegral(0.2);
+        pid.setMaxIntegral(10);
 
         controller = new FinishableIntegratedController(new IntegratingGyroscopeSensor(imu), pid, new ErrorTimeThresholdFinishingAlgorithm(Math.PI/50, 1));
         drivetrain = new HeadingableTankDrivetrain(new DcMotor[]{left, right}, controller);

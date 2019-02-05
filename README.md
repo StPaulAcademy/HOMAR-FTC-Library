@@ -115,3 +115,6 @@ The files in the `/doc` folder aren't meant to be edited directly. If you have m
 * **Added** Ability to set a heading offset for Extrinsicable drivetrains
 * **Added** Copy constructors for PIDController, PIController, PController, and ErrorTimeThresholdFinishingAlgorithm
 * **Added** Getters and setters for ErrorTimeThresholdFinishingAlgorithm
+* **Added** TankAutonomousByTime sample
+* **Added** BNO055HolonomicBotAutonomousByTime sample
+…and miscellaneous minor changes
