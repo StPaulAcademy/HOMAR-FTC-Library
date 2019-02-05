@@ -106,7 +106,7 @@ You can find the Javadoc reference for the most recent version of the library at
 The files in the `/doc` folder aren't meant to be edited directly. If you have made changes to the Javadoc comments within the library code and would like these to be reflected in the HTML Javadoc reference, you can use Android Studio's built-in terminal to run the command `./gradlew HOMARJavadoc` (Mac/Linux) or `gradlew HOMARJavadoc` (Windows). (On Mac/Linux, you may have to first give yourself execute permissions with the command `chmod +x gradlew`.)
 
 ## Changelog
-### develop:
+### 1.1 (released 2019-2-5):
 * **Fixed** Non-Git installation instructions and added detail to Git installation instructions
 * **Fixed** TankDrivetrain positioning formula
 * **Fixed** Inexplicable line of PIDController.java
@@ -117,4 +117,5 @@ The files in the `/doc` folder aren't meant to be edited directly. If you have m
 * **Added** Getters and setters for ErrorTimeThresholdFinishingAlgorithm
 * **Added** TankAutonomousByTime sample
 * **Added** BNO055HolonomicBotAutonomousByTime sample
+
 …and miscellaneous minor changes
