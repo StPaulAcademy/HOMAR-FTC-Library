@@ -16,7 +16,7 @@ Here is a list of all the things HOMAR can do:
     * Integration with encoders to provide precise control of position
     * An innovation we call "extrinsic course control" that makes it easy for a holonomic robot to go in the same direction no matter which way it is facing
 * Controllers
-    * Ready-to-use PID controller code (we learned calculus so you don't have to! :))
+    * Ready-to-use, highly-configurable PID controller code (we learned calculus so you don't have to! :))
     * Integration with the drivetrain package (see above) and the sensor package (see below), including:
         * Support for sensors (e.g. an integrating gyro) that provide both a value and the derivative of that value over time
         * Code for tasks (e.g. rotating a robot) that need some way of determining how close to the target value is close enough (we call this a "finishing algorithm")
@@ -106,6 +106,8 @@ You can find the Javadoc reference for the most recent version of the library at
 The files in the `/doc` folder aren't meant to be edited directly. If you have made changes to the Javadoc comments within the library code and would like these to be reflected in the HTML Javadoc reference, you can use Android Studio's built-in terminal to run the command `./gradlew HOMARJavadoc` (Mac/Linux) or `gradlew HOMARJavadoc` (Windows). (On Mac/Linux, you may have to first give yourself execute permissions with the command `chmod +x gradlew`.)
 
 ## Changelog
+### develop
+* **Added** Changes from 1.1 are now reflected in the list of tasks HOMAR makes easier
 ### 1.1 (released 2019-2-5):
 * **Fixed** Non-Git installation instructions and added detail to Git installation instructions
 * **Fixed** TankDrivetrain positioning formula
